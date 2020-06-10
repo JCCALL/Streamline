@@ -97,3 +97,55 @@ var handleDeleteBtnClick = function() {
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
 $exampleList.on("click", ".delete", handleDeleteBtnClick);
+
+// Find movie
+$("#find-movie").on("click", function (event) {
+    $("#movie-view").empty();
+    // Preventing the submit button from trying to submit the form
+    // We're optionally using a form so the user may hit Enter to search instead of clicking the button
+    event.preventDefault();
+
+    // Here we grab the text from the input box
+    var movie = $("#movie-input").val();
+
+    // OMDB
+    var queryURL = "https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy";
+
+    // UTelly
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com/lookup?term=" + movie + "&country=us",
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-host": "utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com",
+            "x-rapidapi-key": "your_key_here"
+        }
+    }
+
+    $.ajax(settings).done(function (response) {
+        var res = response.results;
+        console.log(res);
+        for (var i = 0; i < res.length; i++) {
+            $("#movie-view").append('<div class="pt-5">' +
+                res[i].name + '<br>' +
+                '<img class="img-fluid" src=' + res[i].picture + '><br>');
+            for (var j = 0; j < res[i].locations.length; j++) {
+                $("#movie-view").append(
+                    '<a target="_blank" href=' + res[i].locations[j].url + '>' +
+                    res[i].locations[j].display_name + '</a><br>'
+                    + '</div>'
+                );
+            }
+        }
+
+    });
+    // Returns OMDB data to console
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function (response) {
+        var data = JSON.stringify(response);
+        console.log(data);
+    });
+});
