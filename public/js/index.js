@@ -119,7 +119,7 @@ $("#find-movie").on("click", function (event) {
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com",
-            "x-rapidapi-key": "your_key_here"
+            "x-rapidapi-key": key
         }
     }
 
