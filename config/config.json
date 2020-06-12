@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "root",
-    "database": "streamlinedb",
+    "database": "streamline_db",
     "host": "localhost",
     "dialect": "mysql"
   },
