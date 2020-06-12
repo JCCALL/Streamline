@@ -1,6 +1,7 @@
 .list-group-item {
   line-height: 2.5;
 }
+
 body {
     font-family: Arial;
     background-color: rgb(26, 26, 26);
@@ -72,6 +73,7 @@ body {
 }
 #headLogin{
   position: absolute;
+
   right: 14px;
   top: 14px;
 }

@@ -154,6 +154,7 @@ $("#find-movie").on("click", function (event) {
     });
 });
 
+
 // Tabs function
 function openTabs(evt, showName) {
     var i, tabcontent, tablinks;
@@ -168,3 +169,4 @@ function openTabs(evt, showName) {
     document.getElementById(showName).style.display = "block";
     evt.currentTarget.className += " active";
 }
+
