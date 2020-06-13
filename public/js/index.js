@@ -108,10 +108,7 @@ $("#find-movie").on("click", function (event) {
     // Here we grab the text from the input box
     var movie = $("#movie-input").val();
 
-    // OMDB
-    var queryURL = "https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy";
-
-    // UTelly
+    // UTelly config
     var settings = {
         "async": true,
         "crossDomain": true,
@@ -119,37 +116,45 @@ $("#find-movie").on("click", function (event) {
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com",
-            "x-rapidapi-key": "your_key_here"
+            "x-rapidapi-key": key
         }
     }
 
+    //UTelly Call
     $.ajax(settings).done(function (response) {
         var res = response.results;
         console.log(res);
         for (var i = 0; i < res.length; i++) {
-            $("#movie-view").append('<div class="pt-5">' +
-                res[i].name + '<br>' +
-                '<img class="img-fluid" src=' + res[i].picture + '><br>');
+            $("#movie-view").append('<div class="movie-data pt-5"><h3>' +
+                res[i].name + '</h3><br>' +
+                '<img class="movie-pic img-fluid" src=' + res[i].picture + '><br></div>');
             for (var j = 0; j < res[i].locations.length; j++) {
-                $("#movie-view").append(
-                    '<a target="_blank" href=' + res[i].locations[j].url + '>' +
-                    res[i].locations[j].display_name + '</a><br>'
-                    + '</div>'
-                );
+                if (res[i].locations[j].icon) {
+                    $("#movie-view").append(
+                         '<div class="streaming-list"><a target="_blank" href=' + res[i].locations[j].url + 
+                         '><img class="streaming-icons img-fluid" src=' + res[i].locations[j].icon + '></a></div>'
+                    );
+                }
             }
         }
 
     });
+
+    // OMDB
+    var queryURL = "https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy";
+
     // Returns OMDB data to console
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function (response) {
-        var data = JSON.stringify(response);
-        console.log(data);
+        console.log(response)
+        // var data = JSON.stringify(response);
+        // console.log(data);
     });
 });
 
+<<<<<<< HEAD
 function showPassword() {
   var x = document.getElementById("myInput");
   if (x.type === "password") {
@@ -158,3 +163,21 @@ function showPassword() {
     x.type = "password";
   }
 }
+=======
+
+// Tabs function
+function openTabs(evt, showName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(showName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+>>>>>>> 3bf35cb831804bc376a457c0cc58b835ca8af864
