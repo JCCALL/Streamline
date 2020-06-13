@@ -21,4 +21,27 @@ module.exports = function(app) {
       res.json(dbStreamline);
     });
   });
+
+  //post for new user
+  app.post("/api/newuser", function(req, res) {
+    db.User.create({
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password
+    }).then(function(data){
+    res.redirect('/')
+  });
+  });
+  //post for login
+  app.post("/api/login", function(req, res) {
+    db.User.findOne({ where: 
+      {
+        username: req.body.username.trim(),
+        password: req.body.password.trim()
+      }
+    }).then(function(data) {
+      console.log(data);
+      res.redirect('/' + data.id);
+    });
+  });
 };
