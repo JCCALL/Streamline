@@ -169,4 +169,3 @@ function openTabs(evt, showName) {
     document.getElementById(showName).style.display = "block";
     evt.currentTarget.className += " active";
 }
-
