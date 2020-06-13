@@ -1,12 +1,14 @@
 .list-group-item {
   line-height: 2.5;
 }
-body {font-family: Arial;}
 
-
+body {
+    font-family: Arial;
+    background-color: rgb(26, 26, 26);
+    color: white;
+}
 
 /* The Tabs CSS */
-
 
 /* Style the tab */
 .tab {
@@ -22,14 +24,34 @@ body {font-family: Arial;}
   border: none;
   outline: none;
   cursor: pointer;
-  padding: 14px 16px;
+  padding: 17px 16px;
   transition: 0.3s;
   font-size: 17px;
+}
+
+.search-bar {
+    background-color: inherit;
+    float: right;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 11px 14px;
+    transition: 0.3s;
+    font-size: 17px;
 }
 
 /* Change background color of buttons on hover */
 .tab button:hover {
   background-color: #ddd;
+}
+
+.btn-primary {
+    background-color: rgb(104, 140, 161);
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: rgb(49, 98, 126);
 }
 
 /* Create an active/current tablink class */
@@ -40,19 +62,20 @@ body {font-family: Arial;}
 /* Style the tab content */
 .tabcontent {
   display: none;
-  padding: 6px 12px;
+  padding: 20px;
   border: 1px solid #ccc;
   border-top: none;
+  background-color: white;
+  color: black;
 }
 #headTitle{
   position: relative;
 }
 #headLogin{
   position: absolute;
-  right: 30px;
-  top: 30px;
 
-  
+  right: 14px;
+  top: 14px;
 }
 
 /* Modal CSS */
@@ -61,14 +84,29 @@ button:hover {
 }
 
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
   background-color: #474e5d;
-  padding-top: 50px;
+}
+
+/* Movie results  */
+.movie-pic {
+    width: 50%;
+}
+
+.streaming-icon {
+    width: 100px;
+}
+
+/* Header */
+.title {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 70px;
+    font-family: 'Montserrat Subrayada', sans-serif;
+    background: -webkit-linear-gradient(-90deg,rgb(148, 203, 214),rgb(255, 255, 255) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: white;
+}
+.line {
+    /* This class can be used if we want "line" to be a different color than "stream" */
 }
