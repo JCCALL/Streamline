@@ -85,6 +85,7 @@ button:hover {
 
 .modal {
   background-color: #474e5d;
+  color: black;
 }
 
 /* Movie results  */
@@ -110,3 +111,20 @@ button:hover {
 .line {
     /* This class can be used if we want "line" to be a different color than "stream" */
 }
+
+/* Header line animation */
+.line-animate {
+    border-top: 3px solid white;
+    position: absolute;
+    top: 112px;
+    animation-name: lines;
+    animation-duration: 2s;
+    animation-delay: .3s;
+} 
+
+  @keyframes lines {
+    0%   {width: 0%; left: 0;}
+    33%  {width: 100%; left: 0;}
+    66%  {width: 100%; right: 0;}
+    100% {width: 0%; right: 0;}
+  }

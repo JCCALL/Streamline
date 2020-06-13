@@ -10,6 +10,39 @@ module.exports = function(app) {
       });
     });
   });
+  // app.get("/", function(req, res) {
+  //   res.render("index", {
+  //     layout: 'main'
+  //   });
+  // });
+  app.get("/login", function(req, res) {
+    res.render("login", {
+      layout: 'main'
+    });
+  });
+  app.get("/newuser", function(req, res) {
+    res.render("newuser", {
+      layout: 'main'
+    });
+  });
+
+  app.get("/login", function(req, res) {
+    db.Streamline.findAll({}).then(function(dbStreamline) {
+      res.render("login", {
+        msg: "Welcome!",
+        examples: dbStreamline
+      });
+    });
+  });
+
+  app.get("/home", function(req, res) {
+    db.Streamline.findAll({}).then(function(dbStreamline) {
+      res.render("home", {
+        msg: "Welcome!",
+        examples: dbStreamline
+      });
+    });
+  });
 
   // Load example page and pass in an example by id
   app.get("/example/:id", function(req, res) {
