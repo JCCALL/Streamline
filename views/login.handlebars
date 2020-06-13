@@ -1,22 +1,23 @@
 <div class="container">
     <h1>Log In</h1>
     <hr>
-    <form action="#">
-    <label for="username"><b>Username:</b></label>
-    <br>
-    <input type="text" placeholder="Username" name="username" required>
-    <br>
-    <label for="psw"><b>Password:</b></label>
-    <br>
-    <input type="password" placeholder="Enter Password" name="psw" required>
-    <br>
-    <input type="checkbox" onclick="showPassword()">Show Password
-    <label>
-    <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px">Remember me</label>
-    <p>By creating an account you agree to our <a href="#"style="color:dodgerblue">Terms & Privacy</a>.</p>
-    <button type="button" class="btn btn-primary">Log In Now</button>
+    <form method="POST" action="/api/login">
+        <label for="username"><b>Username:</b></label>
+        <br>
+        <input type="text" placeholder="Username" name="username" required>
+        <br>
+        <label for="psw"><b>Password:</b></label>
+        <br>
+        <input id="myInput" type="password" placeholder="Enter Password" name="password" required>
+        <br>
+        <label>
+            <input type="checkbox" onclick="showPassword()">Show Password</label>
+        <label>
+            <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px">Remember me</label>
+        <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+        <button type="submit" class="btn btn-primary">Log In Now</button>
     </form>
-    <a herf="/new">New User Click Here</a>
+    <p>New User <a href="/newuser" class="text-white login">Click Here!</a></p>
 </div>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

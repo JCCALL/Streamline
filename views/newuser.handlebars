@@ -1,25 +1,29 @@
 <div class="container">
     <h1>New User</h1>
-    <p>Fill out the form below to start finding your the Stream of your Dreams</p>
+    <p>Fill out the form below to start finding the Stream of your Dreams</p>
     <hr>
-    <form action="#">
-    <label for="username"><b>Username:</b></label>
-    <br>
-    <input type="text" placeholder="Username" name="username" required>
-    <br>
-    <label for="email"><b>Email:</b></label>
-    <br>
-    <input type="email" placeholder="Email" name="email" required>
-    <br>
-    <label for="psw"><b>Password:</b></label>
-    <br>
-    <input type="password" placeholder="Enter Password" name="psw" id="myInput" required>
-    <br>
-    <input type="checkbox" onclick="showPassword()">Show Password
-    <label>
-    <p>By creating an account you agree to our <a href="#"style="color:dodgerblue">Terms & Privacy</a>.</p>
-    <button type="button" class="btn btn-primary">Register Now</button>
+    <form method="POST" action="/api/newuser">
+        <label for="username"><b>Username:</b></label>
+        <br>
+        <input type="text" placeholder="Username" name="username" required>
+        <br>
+        <label for="email"><b>Email:</b></label>
+        <br>
+        <input type="email" placeholder="Email" name="email" required>
+        <br>
+        <label for="psw"><b>Password:</b></label>
+        <br>
+        <input id="myInput" type="password" placeholder="Enter Password" name="password" id="myInput" required>
+        <br>
+        <label>
+            <input type="checkbox" onclick="showPassword()">Show Password</label>
+        <br>
+        <label>
+            <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+        </label>
+        <br>
+        <button type="submit" class="btn btn-primary">Register Now</button>
     </form>
     <br>
-    <a herf="/">Already Registered Click Here!</a>
+    <p>Already Registered <a href="/login" class="text-white login">Click Here!</a></p>
 </div>

@@ -154,16 +154,6 @@ $("#find-movie").on("click", function (event) {
     });
 });
 
-<<<<<<< HEAD
-function showPassword() {
-  var x = document.getElementById("myInput");
-  if (x.type === "password") {
-    x.type = "text";
-  } else {
-    x.type = "password";
-  }
-}
-=======
 
 // Tabs function
 function openTabs(evt, showName) {
@@ -180,4 +170,11 @@ function openTabs(evt, showName) {
     evt.currentTarget.className += " active";
 }
 
->>>>>>> 3bf35cb831804bc376a457c0cc58b835ca8af864
+function showPassword() {
+  var x = document.getElementById("myInput");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
