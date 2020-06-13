@@ -102,6 +102,8 @@ $exampleList.on("click", ".delete", handleDeleteBtnClick);
 // Find movie
 $("#find-movie").on("click", function (event) {
     $("#movie-view").empty();
+    omdbResults = [];
+    utellyResults = [];
     // Preventing the submit button from trying to submit the form
     // We're optionally using a form so the user may hit Enter to search instead of clicking the button
     event.preventDefault();
@@ -117,42 +119,43 @@ $("#find-movie").on("click", function (event) {
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com",
-            "x-rapidapi-key": key
+            "x-rapidapi-key": api_key
         }
     }
 
-    //UTelly Call
+    //UTelly Call - saves to results array
     $.ajax(settings).done(function (response) {
         var res = response.results;
-        console.log(res);
-        for (var i = 0; i < res.length; i++) {
-            $("#movie-view").append('<div class="movie-data pt-5"><h3>' +
-                res[i].name + '</h3><br>' +
-                '<img class="movie-pic img-fluid" src=' + res[i].picture + '><br></div>');
-            for (var j = 0; j < res[i].locations.length; j++) {
-                if (res[i].locations[j].icon) {
-                    $("#movie-view").append(
-                         '<div class="streaming-list"><a target="_blank" href=' + res[i].locations[j].url + 
-                         '><img class="streaming-icons img-fluid" src=' + res[i].locations[j].icon + '></a></div>'
-                    );
-                }
-            }
-        }
+        utellyResults.push(res);
+        console.log(utellyResults);
     });
 
     // OMDB
     var queryURL = "https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy";
 
-    // Returns OMDB data to console
+    // OMDB Call - saves to results array
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function (response) {
-        console.log(response)
-        // var data = JSON.stringify(response);
-        // console.log(data);
+        omdbResults.push(response);
+        console.log(omdbResults);
     });
 });
+
+    for (var i = 0; i < utellyResults.length; i++) {
+        $("#movie-view").append('<div class="movie-data pt-5"><h3>' +
+            utellyResults[i].name + '</h3><br>' +
+            '<img class="movie-pic img-fluid" src=' + utellyResults[i].picture + '><br></div>');
+        for (var j = 0; j < utellyResults[i].locations.length; j++) {
+            if (utellyResults[i].locations[j].icon) {
+                $("#movie-view").append(
+                    '<div class="streaming-list"><a target="_blank" href=' + utellyResults[i].locations[j].url + 
+                    '><img class="streaming-icons img-fluid" src=' + utellyResults[i].locations[j].icon + '></a></div>'
+                );
+            }
+        }
+    }
 
 
 // Tabs function
