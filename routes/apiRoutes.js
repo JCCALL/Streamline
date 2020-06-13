@@ -24,17 +24,18 @@ module.exports = function(app) {
 
   //post for new user
   app.post("/api/newuser", function(req, res) {
-    db.User.create({
+    db.users.create({
       username: req.body.username,
       email: req.body.email,
       password: req.body.password
+      
     }).then(function(data){
     res.redirect('/')
   });
   });
   //post for login
   app.post("/api/login", function(req, res) {
-    db.User.findOne({ where: 
+    db.users.findOne({ where: 
       {
         username: req.body.username.trim(),
         password: req.body.password.trim()

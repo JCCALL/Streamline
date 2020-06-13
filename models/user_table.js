@@ -2,7 +2,7 @@ var bcrypt = require("bcrypt");
 
 
 module.exports = function (sequelize, DataTypes) {
-    const User = sequelize.define('users', {
+    var User = sequelize.define('users', {
         username: {
             type: DataTypes.STRING,
             allowNull: false
@@ -25,5 +25,12 @@ module.exports = function (sequelize, DataTypes) {
             }
         });
 
+         User.associate = function(models){
+            User.belongsTo(models.streamline_table,{
+               foreignKey: {
+                   allowNull: false
+                 }
+            })
+        }
     return User;
-}
+};
