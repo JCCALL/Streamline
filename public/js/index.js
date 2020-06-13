@@ -29,6 +29,12 @@ var API = {
       url: "api/examples/" + id,
       type: "DELETE"
     });
+  },
+  getMovie: function(movie){
+    return $.ajax({
+      url: "api/utelly" + movie,
+      type: "GET"
+    })
   }
 };
 
@@ -110,6 +116,42 @@ $("#find-movie").on("click", function (event) {
     // Here we grab the text from the input box
     var movie = $("#movie-input").val();
 
+    API.getMovie(movie).then(function(res) {
+      console.log(res.data)
+      for (var i = 0; i < res.length; i++) {
+             $("#movie-view").append('<div class="movie-data pt-5"><h3>' +
+               res[i].name + '</h3><br>' +
+              '<img class="movie-pic img-fluid" src=' + res[i].picture + '><br></div>');
+            for (var j = 0; j < res[i].locations.length; j++) {
+              if (res[i].locations[j].icon) {
+                $("#movie-view").append(
+                  '<div class="streaming-list"><a target="_blank" href=' + res[i].locations[j].url +
+                  '><img class="streaming-icons img-fluid" src=' + res[i].locations[j].icon + '></a></div>'
+                );
+              }
+            }
+          }
+    });
+
+
+    //UTelly Call
+    // $.ajax(settings).done(function (response) {
+    //   var res = response.results;
+    //   console.log(res);
+    //   for (var i = 0; i < res.length; i++) {
+    //     $("#movie-view").append('<div class="movie-data pt-5"><h3>' +
+    //       res[i].name + '</h3><br>' +
+    //       '<img class="movie-pic img-fluid" src=' + res[i].picture + '><br></div>');
+    //     for (var j = 0; j < res[i].locations.length; j++) {
+    //       if (res[i].locations[j].icon) {
+    //         $("#movie-view").append(
+    //           '<div class="streaming-list"><a target="_blank" href=' + res[i].locations[j].url +
+    //           '><img class="streaming-icons img-fluid" src=' + res[i].locations[j].icon + '></a></div>'
+    //         );
+    //       }
+    //     }
+    //   }
+    // });
     
     // OMDB
     var queryURL = "https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy";
