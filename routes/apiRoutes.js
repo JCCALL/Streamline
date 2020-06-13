@@ -15,6 +15,12 @@ module.exports = function(app) {
     });
   });
 
+  app.get("/api/testing", function(req, res) {
+    db.users.findAll({}).then(function(dbStreamline) {
+      res.json(dbStreamline);
+    });
+  });
+
   // Delete an example by id
   app.delete("/api/examples/:id", function(req, res) {
     db.Streamline.destroy({ where: { id: req.params.id } }).then(function(dbStreamline) {
@@ -24,7 +30,7 @@ module.exports = function(app) {
 
   //post for new user
   app.post("/api/newuser", function(req, res) {
-    db.User.create({
+    db.users.create({
       username: req.body.username,
       email: req.body.email,
       password: req.body.password

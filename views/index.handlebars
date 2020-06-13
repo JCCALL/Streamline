@@ -4,7 +4,7 @@
             <h1 class="title">Stream<span class="line">Line</span></h1>
             <div class="line-animate"></div>
             <!--<h4>Sit on your ass less! Find your shows faster!</h4>-->
-             <h4>Sit on your ass. Find your shows fast.</h4>
+            <h4>Sit on your ass. Find your shows fast.</h4>
             <!--<h4>Browse Less. Watch More.</h4>
             <small>(these are all tagline ideas)</small>-->
         </div>
@@ -101,74 +101,43 @@
             </div>
         </div>
 
-        <!-- Tab section -->
-        <div class="tab text-dark">
-            <button class="tablinks" onclick="openTabs(event, 'Watchlist')">Watchlist</button>
-            <button class="tablinks" onclick="openTabs(event, 'Favorites')">Loved</button>
-            <button class="tablinks" onclick="openTabs(event, 'Watched')">Watched</button>
-           
-            <!-- This form will be where users input data about the movies -->
-            <div class="search-bar">
-            <form id="movie-form">
-            <label class="search-text" for="movie-input">Search for a movie</label>
-            <input class="mx-2 search" type="text" id="movie-input">
+        <div class="container">
+            <!-- Tab section -->
+            <div class="tab text-dark">
+                <button class="tablinks" onclick="openTabs(event, 'Watchlist')">Watchlist</button>
+                <button class="tablinks" onclick="openTabs(event, 'Favorites')">Loved</button>
+                <button class="tablinks" onclick="openTabs(event, 'Watched')">Watched</button>
 
-            <!-- This button will trigger our AJAX call -->
-            <input class="btn btn-primary" id="find-movie" type="submit" value="Search">
+                <!-- This form will be where users input data about the movies -->
+                <div class="search-bar">
+                    <form id="movie-form">
+                        <label class="search-text" for="movie-input">Search for a movie</label>
+                        <input class="mx-2 search" type="text" id="movie-input">
+
+                        <!-- This button will trigger our AJAX call -->
+                        <input class="btn btn-primary" id="find-movie" type="submit" value="Search">
+                </div>
+                </form>
             </div>
-        </form>
-        </div>
 
-        <div id="Watchlist" class="tabcontent">
-            <h3>Movies/Shows I want to watch!</h3>
-            <p>List of Movies:</p>
-        </div>
+            <div id="Watchlist" class="tabcontent">
+                <h3>Movies/Shows I want to watch!</h3>
+                <p>List of Movies:</p>
+            </div>
 
-        <div id="Favorites" class="tabcontent">
-            <h3>My Favorites!</h3>
-            <p>List of Favorited Movies/Shows</p>
-        </div>
+            <div id="Favorites" class="tabcontent">
+                <h3>My Favorites!</h3>
+                <p>List of Favorited Movies/Shows</p>
+            </div>
 
-        <div id="Watched" class="tabcontent">
-            <h3>Everything from my Watchlist that I have Watched!</h3>
-            <p>List of Watched Movies/Shows.</p>
-        </div>
+            <div id="Watched" class="tabcontent">
+                <h3>Everything from my Watchlist that I have Watched!</h3>
+                <p>List of Watched Movies/Shows.</p>
+            </div>
 
-        <!-- Movie results -->
-        <div id="movie-view">
+            <!-- Movie results -->
+            <div id="movie-view">
+            </div>
         </div>
     </div>
 </div>
-
-{{!-- 
-Keep this for now in case we need to reference the code
-<div id="home">
-    <div class="container">
-        <div class="row">
-            <div class="col-8 offset-2">
-                <form class="clearfix mb-4" action="POST">
-                    <div class="form-group">
-                        <label for="example-text"></label>
-                        <input type="text" id="example-text" class="form-control" aria-describedby="example-text"
-                            placeholder="Enter Example Text">
-                    </div>
-                    <div class="form-group">
-                        <label for="example-description"></label>
-                        <textarea class="form-control" id="example-description" aria-describedby="example-description"
-                            placeholder="Enter Example Description"></textarea>
-                    </div>
-                    <button id="submit" class="btn btn-primary float-right">Submit</button>
-                </form>
-                <h3>Examples:</h3>
-                <ul id="example-list" class="list-group">
-                    {{#each examples}}
-                    <li data-id="{{this.id}}" class="list-group-item">
-                        <a href="example/{{this.id}}">{{this.text}}</a>
-                        <button class="btn btn-danger float-right delete">ｘ</button>
-                    </li>
-                    {{/each}}
-                </ul>
-            </div>
-        </div>
-    </div>
-</div> --}}
