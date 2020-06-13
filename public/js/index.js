@@ -1,8 +1,10 @@
 // Get references to page elements
+require("dotenv").config();
 var $exampleText = $("#example-text");
 var $exampleDescription = $("#example-description");
 var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
+var api_key = process.env.API_KEY;
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -116,7 +118,7 @@ $("#find-movie").on("click", function (event) {
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com",
-            "x-rapidapi-key": key
+            "x-rapidapi-key": api_key
         }
     }
 
