@@ -1,16 +1,19 @@
 var db = require("../models");
+// const { default: Axios } = require("axios");
+var axios = require("axios");
+var api_key = process.env.API_KEY;
 
-module.exports = function(app) {
+module.exports = function (app) {
   // Get all examples
-  app.get("/api/examples", function(req, res) {
-    db.Streamline.findAll({}).then(function(dbStreamline) {
+  app.get("/api/examples", function (req, res) {
+    db.Streamline.findAll({}).then(function (dbStreamline) {
       res.json(dbStreamline);
     });
   });
 
   // Create a new example
-  app.post("/api/examples", function(req, res) {
-    db.Streamline.create(req.body).then(function(dbStreamline) {
+  app.post("/api/examples", function (req, res) {
+    db.Streamline.create(req.body).then(function (dbStreamline) {
       res.json(dbStreamline);
     });
   });
@@ -22,12 +25,13 @@ module.exports = function(app) {
   });
 
   // Delete an example by id
-  app.delete("/api/examples/:id", function(req, res) {
-    db.Streamline.destroy({ where: { id: req.params.id } }).then(function(dbStreamline) {
+  app.delete("/api/examples/:id", function (req, res) {
+    db.Streamline.destroy({ where: { id: req.params.id } }).then(function (dbStreamline) {
       res.json(dbStreamline);
     });
   });
 
+<<<<<<< HEAD
   //post for new user
   app.post("/api/newuser", function(req, res) {
     db.users.create({
@@ -48,6 +52,27 @@ module.exports = function(app) {
     }).then(function(data) {
       console.log(data);
       res.redirect('/' + data.id);
+=======
+  // UTelly config (needs to be inside another app.get with route of api/utelly)
+  app.get("/api/utelly", function (req, res) {
+
+    //var movie = req.
+
+    axios({
+      method: "get",
+      url: "https://utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com/lookup?term=" + "Jaws" + "&country=us",
+      headers: {
+        "x-rapidapi-host": "utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com",
+        "x-rapidapi-key": api_key
+      },
+      async: true,
+      crossDomain: true,
+    }).then(function(response){
+      console.log(response.data);
+      res.json(response.data)
+>>>>>>> 92aaa87d4265d4dc0e8fafaee9ba481f567eb770
     });
+
   });
 };
+
