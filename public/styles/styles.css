@@ -3,13 +3,17 @@
 }
 
 body {
-  background: url(../images/film.png) no-repeat;
-  /* background-color: black; */
+  background: url("../images/film_overlay.png");
   background-color: rgb(26, 26, 26);
   font-family: Arial;
   color: white;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
+/* 
+Not necessary if using film_overlay.png
 .overlay {
   background-color: rgb(0, 0, 0, 0.5);
   width: 100%; 
@@ -17,7 +21,7 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-}
+} */
 
 
 /* The Tabs CSS */
@@ -43,7 +47,7 @@ body {
 
 .search-bar {
     border: none;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
 }
 
 .search {
@@ -84,7 +88,6 @@ body {
 }
 #headLogin{
   position: absolute;
-
   right: 14px;
   top: 14px;
 }
@@ -112,15 +115,12 @@ button:hover {
 .title {
     text-transform: uppercase;
     font-weight: bold;
-    font-size: 70px;
     font-family: 'Montserrat Subrayada', sans-serif;
     background: -webkit-linear-gradient(-90deg,rgb(148, 203, 214),rgb(255, 255, 255) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     color: white;
-}
-.line {
-    /* This class can be used if we want "line" to be a different color than "stream" */
+    font-size: 70px;
 }
 
 /* Header line animation */
@@ -138,4 +138,20 @@ button:hover {
     33%  {width: 100%; left: 0;}
     66%  {width: 100%; right: 0;}
     100% {width: 0%; right: 0;}
+  }
+
+  @media screen and (max-width: 500px) {
+    .title {
+      font-size: 40px;
+    }
+    .search {
+        width: 70%;
+        margin-bottom: 15px;
+    }
+    .login {
+        font-size: 10px;
+    }
+    .search-bar {
+        margin-bottom: 30px;
+    }
   }

@@ -1,9 +1,11 @@
-<div class="overlay">
+<div class="overlay"></div>
+<div class="container-fluid p-0">
+    <div class="line-animate"></div>
     <div class="container">
         <div class="text-center" id="mainContain">
             <div id="headTitle" class="py-5">
-                <h1 class="title">Stream<span class="line">Line</span></h1>
-                <div class="line-animate"></div>
+                <h1 class="title">StreamLine</h1>
+
                 <!--<h4>Sit on your ass less! Find your shows faster!</h4>-->
                 <h4>Sit on your ass. Find your shows fast.</h4>
                 <!--<h4>Browse Less. Watch More.</h4>
@@ -11,25 +13,25 @@
             </div>
 
             <!-- This form will be where users input data about the movies -->
-                    <div class="search-bar">
-                        <form id="movie-form">
-                            <label class="search-text" for="movie-input">Search for a movie</label>
-                            <input class="mx-2 search" type="text" id="movie-input">
+            <div class="search-bar">
+                <form id="movie-form" action="POST">
+                    <label class="search-text" for="movie-input">Search for a movie</label>
+                    <input class="mx-2 search" type="text" id="movie-input" name="search">
 
-                            <!-- This button will trigger our AJAX call -->
-                            <input class="btn btn-primary" id="find-movie" type="submit" value="Search">
-                        </form>
-                    </div>
+                    <!-- This button will trigger our AJAX call -->
+                    <input class="btn btn-primary" id="find-movie" type="submit" value="Search">
+                </form>
+            </div>
 
             <div id="headLogin">
 
                 <!-- Button trigger login modal -->
-                <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#loginModal">
+                <button type="button" class="btn btn-primary mr-2 login" data-toggle="modal" data-target="#loginModal">
                     Login
                 </button>
 
                 <!-- Button trigger register modal -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">
+                <button type="button" class="btn btn-primary login" data-toggle="modal" data-target="#registerModal">
                     Register
                 </button>
             </div>
@@ -114,7 +116,6 @@
                 </div>
             </div>
 
-            <div class="container">
                 <!-- Tab section -->
                 <div class="tab text-dark">
                     <button class="tablinks" onclick="openTabs(event, 'Watchlist')">Watchlist</button>
@@ -140,6 +141,7 @@
                 <!-- Movie results -->
                 <div id="movie-view">
                 </div>
-            </div>
         </div>
     </div>
+</div>
+</div>
