@@ -31,13 +31,13 @@ module.exports = function (sequelize, DataTypes) {
         }
     });
     
-     Streamline.associate = function(models){
-         Streamline.hasMany(models.User, {
-            through: "Movies",
-            as: "movie",
-            foreignKey: "streamlineID",
-            otherKey: "userID"
-         });
-     }
+    //  Streamline.associate = function(models){
+    //      Streamline.hasMany(models.User, {
+    //         through: "Movies",
+    //         as: "movie",
+    //         foreignKey: "streamlineID",
+    //         otherKey: "userID"
+    //      });
+    //  }
     return Streamline;
 };

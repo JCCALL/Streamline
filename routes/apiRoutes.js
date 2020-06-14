@@ -46,6 +46,8 @@ module.exports = function (app) {
     }).then(function(data) {
       console.log(data);
       res.redirect('/' + data.id);
+    });
+  });
   // UTelly config (needs to be inside another app.get with route of api/utelly)
   app.get("/api/utelly", function (req, res) {
 
@@ -66,5 +68,5 @@ module.exports = function (app) {
     });
 
   });
-};
-
+  
+}
