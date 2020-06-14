@@ -128,7 +128,7 @@ $("#find-movie").on("click", function (event) {
     var movie = $("#movie-input").val();
 
     // OMDB
-    var queryURL = "https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy";
+    var queryURL = "https://www.omdbapi.com/?s=" + movie + "&apikey=trilogy";
 
     // OMDB Call - saves to results array
     $.ajax({
@@ -136,7 +136,7 @@ $("#find-movie").on("click", function (event) {
         method: "GET"
     }).then(function (response) {
         omdbResults.push(response);
-        console.log(omdbResults);
+        console.log(omdbResults[0].Search);
     });
 
     var search = {

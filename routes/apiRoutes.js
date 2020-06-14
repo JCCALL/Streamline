@@ -1,7 +1,6 @@
 var db = require("../models");
 var axios = require("axios");
 var api_key = process.env.API_KEY;
-var movie = "";
 
 module.exports = function (app) {
   // Get all examples
