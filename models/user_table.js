@@ -1,8 +1,12 @@
 var bcrypt = require("bcrypt");
 
-
 module.exports = function (sequelize, DataTypes) {
     var User = sequelize.define('users', {
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
         username: {
             type: DataTypes.STRING,
             allowNull: false
@@ -24,13 +28,14 @@ module.exports = function (sequelize, DataTypes) {
                 }
             }
         });
-
+        
          User.associate = function(models){
-            User.belongsTo(models.streamline_table,{
-               foreignKey: {
-                   allowNull: false
-                 }
-            })
+            User.belongsToMany(models.Streamline, {
+                through: "Movies",
+                as: "user",
+                foreignKey: "userID",
+                otherKey: "streamlineID"
+            });
         }
     return User;
 };
