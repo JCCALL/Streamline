@@ -26,18 +26,18 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/login", function(req, res) {
+  app.get("/home", function(req, res) {
     db.Streamline.findAll({}).then(function(dbStreamline) {
-      res.render("login", {
+      res.render("home", {
         msg: "Welcome!",
         examples: dbStreamline
       });
     });
   });
 
-  app.get("/home", function(req, res) {
+  app.get("/testing", function(req, res) {
     db.Streamline.findAll({}).then(function(dbStreamline) {
-      res.render("home", {
+      res.render("dbtesting", {
         msg: "Welcome!",
         examples: dbStreamline
       });
