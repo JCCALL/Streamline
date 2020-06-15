@@ -1,6 +1,6 @@
 
 module.exports = function (sequelize, DataTypes) {
-    var Flix = sequelize.define("Flix", {
+    var Streamline = sequelize.define("Streamline", {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -30,22 +30,15 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false
         }
     });
+
+    Streamline.associate = (models) => {
+        Streamline.belongsTo(models.User, {
+            foreignKey: {
+                allowNull: false
+              }
+        })
+    }
     
-    //lines 35 to 42 are to help join this table with the user table it is blocked because it will not let the server run at this point.
-    //  Flix.associate = function(models){
-    //      Flix.belongsToMany(models.User, {
-    //         through: "Movies",
-    //         as: "movie",
-    //         foreignKey: "flixID",
-    //         otherKey: "userID"
-    //      });
-    //  }
-    // Flix.associate = (models) =>{
-    //     Flix.belongsTo(models.User, {
-    //         foreignKey: {
-    //             allowNull: false
-    //         }
-    //     });
-    // };
-    return Flix;
+    
+    return Streamline;
 };
