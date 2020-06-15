@@ -1,7 +1,7 @@
 <div class="overlay"></div>
 <div class="container-fluid p-0">
     <div class="line-animate"></div>
-    <div class="container" id="mainContain">
+    <div class="container main-container">
             <div id="headTitle" class="py-5 heading">
                 <h1 class="title">StreamLine</h1>
 
@@ -25,12 +25,12 @@
             <div id="headLogin">
 
                 <!-- Button trigger login modal -->
-                <button type="button" class="btn btn-primary mr-2 login" data-toggle="modal" data-target="#loginModal">
+                <a href="/login"><button class="btn btn-primary mr-2 login">
                     Login
-                </button>
+                </button></a>
 
                 <!-- Button trigger register modal -->
-                <button type="button" class="btn btn-primary login" data-toggle="modal" data-target="#registerModal">
+                <a href="/newuser"><button class="btn btn-primary mr-2 login">
                     Register
                 </button>
             </div>
@@ -142,10 +142,9 @@
             <div id="Default" class="tabcontent show-content">
                 <div class="row">
                     <div class="col-sm-6">
-                        <img class="img-fluid"
-                            src="https://ae01.alicdn.com/kf/H100652e33735449f878c3ba450ad1756J/60x84cm-Marvel-Comic-Spider-Man-Super-hero-Spiderman-Movie-Posters-Cartoon-Canvas-Painting-By-numbers-poster.jpg">
+                        <div class="image-animate"></div>
                     </div>
-                    <div class="col-sm-6 m-auto text-center">
+                    <div class="col-sm-6 pt-5 text-center">
                         <h3 class="pb-3 pt-3 pt-sm-0">Browse Less.<br>
                             Watch More.</h3>
                         <p>Welcome to StreamLine, your one-stop resource for finding where your favorite movies and
@@ -157,6 +156,29 @@
 
             <!-- Movie results -->
             <div class="row movie-view" id="movie-view">
+            </div>
+
+            <!-- Movie Modal -->
+            <div class="modal fade" id="movieModal" tabindex="-1" role="dialog" aria-labelledby="movieModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="loginModalLabel">Movie Details</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+
+                        </div>
+                        <div class="modal-body">
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Add to Watchlist</button>
+                        </div>
+                    </div>
+                </div>
             </div>
     </div>
 </div>

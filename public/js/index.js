@@ -6,7 +6,8 @@ var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
 var utellyResults = [];
 var omdbResults = [];
-var imdbIDArray = [];
+var omdbIdArray = [];
+var utellyIdArray = [];
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -142,9 +143,9 @@ $("#find-movie").on("click", function (event) {
         console.log(omdb);
         for (i = 0; i < omdb.length; i++) {
             // console.log(omdb[i].Poster + omdb[i].Title + omdb[i].Year);
-            console.log(omdb[i].imdbID);
-            imdbIDArray.push(omdb[i].imdbID);
+            omdbIdArray.push(omdb[i].imdbID);
         }
+        console.log(omdbIdArray);
     });
 
     var search = {
@@ -158,39 +159,41 @@ $("#find-movie").on("click", function (event) {
             var utelly = utellyResults[0].results;
             for (var i = 0; i < utelly.length; i++) {
                 var imdbID = utelly[i].external_ids.imdb.id;
-                console.log("IMDB ID #" + [i] + ": " + imdbID);
+                utellyIdArray.push(imdbID);
                 var movieDiv = $('<div class="movie-list">');
                 var bgOverlay = $('<div class="bg-overlay">');
                 $(movieDiv).attr('id', imdbID);
                 $(movieDiv).attr('value', [i]);
                 $(movieDiv).css('background-image', 'url(' + utelly[i].picture + ')');
-                var movieName = '<h3 class="movie-title">' + utelly[i].name + '</h3>';
+                var movieName = '<h4 class="movie-title">' + utelly[i].name + '</h4>';
                 var moviePicture = '<img class="movie-pic img-fluid" src=' + utelly[i].picture + '>';
                 var imdbLink = '<a target="_blank" href=' + utelly[i].external_ids.imdb.url + '><img class="location-icon img-fluid" src="https://img.icons8.com/all/500/imdb.png"></a>';
+                var buttonDiv = $('<div class="watch-details-buttons">');
                 var watchButton = '<button id="' + [i] + '" value="' + imdbID + '" class="btn btn-primary watch-button">Add to Watchlist</button>';
-                var locationList = $('<div class="location-list">');
-                var streamingIcons = $('<div class="streaming-list col-6">Stream</div>');
-                var locationIcons = $('<div class="rent-or-buy-list col-6">Rent | Buy</div>');
+                var detailsButton = '<button id="details-' + [i] + '" value="' + imdbID + '" class="btn btn-primary details-button" data-toggle="modal" data-target="#movieModal">Details</button>';
+                var locationList = $('<div class="location-list row">');
+                var streamingIcons = $('<div class="streaming-list col-6">');
+                var locationIcons = $('<div class="rent-or-buy-list col-6"><p>Rent | Buy</p><div>');
                 for (var j = 0; j < utelly[i].locations.length; j++) {
                     var provider = utelly[i].locations[j].display_name;
                     if (provider === 'Netflix' || provider === 'Amazon Prime Video' || provider === 'Disney+' || provider === 'HBO' || provider === 'Hulu') {
-                        console.log("streaming");
                         $(streamingIcons).append('<a target="_blank" class="streaming-link" href=' +
                             utelly[i].locations[j].url + '><img class="location-icon img-fluid" src=' +
-                            utelly[i].locations[j].icon + '></a>');
+                            utelly[i].locations[j].icon + '></a><br>');
                     } else if (provider === 'AtomTicketsIVAUS') {
-                        console.log("No icon for AtomTickets");
                     } else {
-                        console.log("Rent/buy list");
                         $(locationIcons).append('<a target="_blank" class="rent-or-buy-link" href=' +
                             utelly[i].locations[j].url + '><img class="location-icon img-fluid" src=' +
-                            utelly[i].locations[j].icon + '></a>');
+                            utelly[i].locations[j].icon + '></a><br>');
                     }
                     $(locationList).append(streamingIcons, locationIcons);
                 }
-                $(movieDiv).append(bgOverlay, movieName, imdbLink, watchButton, locationList);
+                $(buttonDiv).append(detailsButton, watchButton);
+                $(streamingIcons).append(buttonDiv);
+                $(movieDiv).append(bgOverlay, movieName, locationList, buttonDiv);
                 $("#movie-view").append(movieDiv);
             }
+            console.log(utellyIdArray);
         });
     });
 });
