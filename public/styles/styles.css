@@ -3,13 +3,21 @@
 }
 
 body {
-  background: url(../images/film.png) no-repeat;
-  /* background-color: black; */
+  background: url("../images/film_overlay.png");
   background-color: rgb(26, 26, 26);
   font-family: Arial;
   color: white;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
+.main-container {
+  margin-bottom: 40px;
+}
+
+/* 
+Not necessary if using film_overlay.png
 .overlay {
   background-color: rgb(0, 0, 0, 0.5);
   width: 100%; 
@@ -17,7 +25,7 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-}
+} */
 
 
 /* The Tabs CSS */
@@ -26,7 +34,8 @@ body {
 .tab {
   overflow: hidden;
   border: 1px solid #ccc;
-  background-color: #f1f1f1;
+  background-color: rgb(247, 254, 255);
+  color: black;
 }
 
 /* Style the buttons inside the tab */
@@ -41,15 +50,15 @@ body {
   font-size: 17px;
 }
 
+/* Search bar */
 .search-bar {
-    background-color: inherit;
-    float: right;
     border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 11px 14px;
-    transition: 0.3s;
-    font-size: 17px;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.search {
+    width: 30%;
 }
 
 /* Change background color of buttons on hover */
@@ -80,13 +89,16 @@ body {
   border-top: none;
   background-color: white;
   color: black;
+  margin-bottom: 40px;
+}
+.show-content {
+    display: block;
 }
 #headTitle{
   position: relative;
 }
 #headLogin{
   position: absolute;
-
   right: 14px;
   top: 14px;
 }
@@ -102,27 +114,84 @@ button:hover {
 }
 
 /* Movie results  */
-.movie-pic {
-    width: 50%;
+.bg-overlay {
+    /* background: rgba(0, 0, 0, 0.5);
+    width: 100%; 
+    height: 100%;
+    position: absolute; */
 }
 
-.streaming-icon {
+.movie-title {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 8px;
+    margin: 0;
+    color: white;
+    text-transform: uppercase;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.location-icon {
     width: 100px;
+    background-color: rgba(247, 254, 255, 0.9);
+    padding: 0 5px 0 5px;
+    border-radius: 4px;
+    margin: 5px 0px 5px 0px;
+}
+
+.location-list {
+
+}
+
+.movie-view {
+    justify-content: space-between;
+    margin: auto;
+}
+
+.movie-list {
+    color: black;
+    background-color: rgba(247, 254, 255);
+    width: 48%;
+    margin-top: 30px;
+    padding: 0 0 20px 0;
+    background-size: cover;
+}
+
+.streaming-list {
+    float: left;
+    padding-top: 10px;
+    text-align: center;
+    text-transform: uppercase;
+}
+.rent-or-buy-list {
+    float: right;
+    padding-top: 10px;
+    text-align: center;
+    text-transform: uppercase;
+}
+.watch-details-buttons {
+    width: 100%;
+    text-align: center;
+    margin-top: 15px;
+}
+.watch-button, .details-button {
+    margin: 0 5px 0 5px;
 }
 
 /* Header */
+.heading {
+    text-align: center;
+}
+
 .title {
     text-transform: uppercase;
     font-weight: bold;
-    font-size: 70px;
     font-family: 'Montserrat Subrayada', sans-serif;
     background: -webkit-linear-gradient(-90deg,rgb(148, 203, 214),rgb(255, 255, 255) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     color: white;
-}
-.line {
-    /* This class can be used if we want "line" to be a different color than "stream" */
+    font-size: 70px;
 }
 
 /* Header line animation */
@@ -140,4 +209,61 @@ button:hover {
     33%  {width: 100%; left: 0;}
     66%  {width: 100%; right: 0;}
     100% {width: 0%; right: 0;}
+  }
+
+/* changing image animation */
+.image-animate {
+    background-color: black;
+    background-image: url("https://ae01.alicdn.com/kf/H100652e33735449f878c3ba450ad1756J/60x84cm-Marvel-Comic-Spider-Man-Super-hero-Spiderman-Movie-Posters-Cartoon-Canvas-Painting-By-numbers-poster.jpg");
+    height: 500px;
+    background-size: cover;
+    background-position: center;
+    animation-name: pictures;
+    animation-delay: 2s;
+    animation-duration: 15s;
+    animation-iteration-count: infinite;
+} 
+@keyframes pictures {
+    0%   {background-image: url("https://ae01.alicdn.com/kf/H100652e33735449f878c3ba450ad1756J/60x84cm-Marvel-Comic-Spider-Man-Super-hero-Spiderman-Movie-Posters-Cartoon-Canvas-Painting-By-numbers-poster.jpg");}
+    20%  {background-image: url("https://m.media-amazon.com/images/M/MV5BOTVjMmFiMDUtOWQ4My00YzhmLWE3MzEtODM1NDFjMWEwZTRkXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_SY1000_CR0,0,674,1000_AL_.jpg");}
+    40%  {background-image: url("https://m.media-amazon.com/images/M/MV5BYzE5MjY1ZDgtMTkyNC00MTMyLThhMjAtZGI5OTE1NzFlZGJjXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SY1000_CR0,0,666,1000_AL_.jpg");}
+    60%  {background-image: url("https://m.media-amazon.com/images/M/MV5BMGUwZjliMTAtNzAxZi00MWNiLWE2NzgtZGUxMGQxZjhhNDRiXkEyXkFqcGdeQXVyNjU1NzU3MzE@._V1_SY1000_SX675_AL_.jpg");}
+    80%  {background-image: url("https://m.media-amazon.com/images/M/MV5BMjAwNDA5NzEwM15BMl5BanBnXkFtZTgwMTA1MDUyNDE@._V1_SY1000_CR0,0,674,1000_AL_.jpg");}
+    100% {background-image: url("https://ae01.alicdn.com/kf/H100652e33735449f878c3ba450ad1756J/60x84cm-Marvel-Comic-Spider-Man-Super-hero-Spiderman-Movie-Posters-Cartoon-Canvas-Painting-By-numbers-poster.jpg");}
+  }
+  
+  /* Login */
+  input {
+    margin-top: .5em;
+    margin-bottom: .5em;
+  }
+
+  .form {
+    letter-spacing: 0.2em;
+  }
+
+  @media screen and (max-width: 500px) {
+    .title {
+      font-size: 40px;
+    }
+    .search {
+        width: 70%;
+        margin-bottom: 30px;
+    }
+    .login {
+        font-size: 10px;
+    }
+    .line-animate {
+        border-top: 2px solid white;
+        top: 84px;
+    }
+    .movie-list {
+        width: 100%;
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    .image-animate {
+        height: 700px;
+    }
   }
