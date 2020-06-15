@@ -1,9 +1,8 @@
 <div class="overlay"></div>
 <div class="container-fluid p-0">
     <div class="line-animate"></div>
-    <div class="container">
-        <div class="text-center" id="mainContain">
-            <div id="headTitle" class="py-5">
+    <div class="container main-container">
+            <div id="headTitle" class="py-5 heading">
                 <h1 class="title">StreamLine</h1>
 
                 <!--<h4>Sit on your ass less! Find your shows faster!</h4>-->
@@ -26,12 +25,12 @@
             <div id="headLogin">
 
                 <!-- Button trigger login modal -->
-                <button type="button" class="btn btn-primary mr-2 login" data-toggle="modal" data-target="#loginModal">
+                <a href="/login"><button class="btn btn-primary mr-2 login">
                     Login
-                </button>
+                </button></a>
 
                 <!-- Button trigger register modal -->
-                <button type="button" class="btn btn-primary login" data-toggle="modal" data-target="#registerModal">
+                <a href="/newuser"><button class="btn btn-primary mr-2 login">
                     Register
                 </button>
             </div>
@@ -116,32 +115,71 @@
                 </div>
             </div>
 
-                <!-- Tab section -->
-                <div class="tab text-dark">
-                    <button class="tablinks" onclick="openTabs(event, 'Watchlist')">Watchlist</button>
-                    <button class="tablinks" onclick="openTabs(event, 'Favorites')">Loved</button>
-                    <button class="tablinks" onclick="openTabs(event, 'Watched')">Watched</button>
-                </div>
+            <!-- Tab section -->
+            <div class="tab">
+                <button class="tablinks" onclick="openTabs(event, 'Default')"><i class="fa fa-home"
+                        aria-hidden="true"></i></button>
+                <button class="tablinks" onclick="openTabs(event, 'Watchlist')">Watchlist</button>
+                <button class="tablinks" onclick="openTabs(event, 'Favorites')">Loved</button>
+                <button class="tablinks" onclick="openTabs(event, 'Watched')">Watched</button>
+            </div>
 
-                <div id="Watchlist" class="tabcontent">
-                    <h3>Movies/Shows I want to watch!</h3>
-                    <p>List of Movies:</p>
-                </div>
+            <div id="Watchlist" class="tabcontent">
+                <h3>Movies/Shows I want to watch!</h3>
+                <p>List of Movies:</p>
+            </div>
 
-                <div id="Favorites" class="tabcontent">
-                    <h3>My Favorites!</h3>
-                    <p>List of Favorited Movies/Shows</p>
-                </div>
+            <div id="Favorites" class="tabcontent">
+                <h3>My Favorites!</h3>
+                <p>List of Favorited Movies/Shows</p>
+            </div>
 
-                <div id="Watched" class="tabcontent">
-                    <h3>Everything from my Watchlist that I have Watched!</h3>
-                    <p>List of Watched Movies/Shows.</p>
-                </div>
+            <div id="Watched" class="tabcontent">
+                <h3>Everything from my Watchlist that I have Watched!</h3>
+                <p>List of Watched Movies/Shows.</p>
+            </div>
 
-                <!-- Movie results -->
-                <div id="movie-view">
+            <div id="Default" class="tabcontent show-content">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="image-animate"></div>
+                    </div>
+                    <div class="col-sm-6 pt-5 text-center">
+                        <h3 class="pb-3 pt-3 pt-sm-0">Browse Less.<br>
+                            Watch More.</h3>
+                        <p>Welcome to StreamLine, your one-stop resource for finding where your favorite movies and
+                            shows are available to watch online. Create an account and start adding to your watchlist
+                            today!</p>
+                    </div>
                 </div>
-        </div>
+            </div>
+
+            <!-- Movie results -->
+            <div class="row movie-view" id="movie-view">
+            </div>
+
+            <!-- Movie Modal -->
+            <div class="modal fade" id="movieModal" tabindex="-1" role="dialog" aria-labelledby="movieModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="loginModalLabel">Movie Details</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+
+                        </div>
+                        <div class="modal-body">
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Add to Watchlist</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </div>
 </div>
 </div>
