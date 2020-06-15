@@ -30,11 +30,11 @@ module.exports = function (sequelize, DataTypes) {
         });
         
          User.associate = function(models){
-            User.belongsToMany(models.Streamline, {
+            User.belongsToMany(models.Flix, {
                 through: "Movies",
                 as: "user",
                 foreignKey: "userID",
-                otherKey: "streamlineID"
+                otherKey: "flixID"
             });
         }
     return User;
