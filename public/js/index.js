@@ -175,16 +175,22 @@ $("#find-movie").on("click", function (event) {
                 var streamingIcons = $('<div class="streaming-list col-6">');
                 var locationIcons = $('<div class="rent-or-buy-list col-6"><p>Rent | Buy</p><div>');
                 for (var j = 0; j < utelly[i].locations.length; j++) {
+                    var streaming = false;
                     var provider = utelly[i].locations[j].display_name;
                     if (provider === 'Netflix' || provider === 'Amazon Prime Video' || provider === 'Disney+' || provider === 'HBO' || provider === 'Hulu') {
+                        streaming = true;
                         $(streamingIcons).append('<a target="_blank" class="streaming-link" href=' +
                             utelly[i].locations[j].url + '><img class="location-icon img-fluid" src=' +
                             utelly[i].locations[j].icon + '></a><br>');
                     } else if (provider === 'AtomTicketsIVAUS') {
                     } else {
+                        streaming = false;
                         $(locationIcons).append('<a target="_blank" class="rent-or-buy-link" href=' +
                             utelly[i].locations[j].url + '><img class="location-icon img-fluid" src=' +
                             utelly[i].locations[j].icon + '></a><br>');
+                    }
+                    if (streaming === true) {
+                        streamingIcons.prepend('<p>Stream</p>');
                     }
                     $(locationList).append(streamingIcons, locationIcons);
                 }

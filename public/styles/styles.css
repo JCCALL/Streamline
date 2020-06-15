@@ -102,6 +102,24 @@ Not necessary if using film_overlay.png
   right: 14px;
   top: 14px;
 }
+.tic-tac {
+    padding: 20px;
+}
+.steps {
+    padding: 20px;
+}
+.step-1, .step-3 {
+    border-right: 1px solid lightgray;
+}
+.step-1, .step-2 {
+    border-bottom: 1px solid lightgray;
+}
+
+.step-icon {
+    font-size: 50px;
+    padding-bottom: 10px;
+    color: rgb(104, 140, 161);
+}
 
 /* Modal CSS */
 button:hover {
@@ -215,7 +233,7 @@ button:hover {
 .image-animate {
     background-color: black;
     background-image: url("https://ae01.alicdn.com/kf/H100652e33735449f878c3ba450ad1756J/60x84cm-Marvel-Comic-Spider-Man-Super-hero-Spiderman-Movie-Posters-Cartoon-Canvas-Painting-By-numbers-poster.jpg");
-    height: 500px;
+    height: 530px;
     background-size: cover;
     background-position: center;
     animation-name: pictures;
@@ -230,16 +248,6 @@ button:hover {
     60%  {background-image: url("https://m.media-amazon.com/images/M/MV5BMGUwZjliMTAtNzAxZi00MWNiLWE2NzgtZGUxMGQxZjhhNDRiXkEyXkFqcGdeQXVyNjU1NzU3MzE@._V1_SY1000_SX675_AL_.jpg");}
     80%  {background-image: url("https://m.media-amazon.com/images/M/MV5BMjAwNDA5NzEwM15BMl5BanBnXkFtZTgwMTA1MDUyNDE@._V1_SY1000_CR0,0,674,1000_AL_.jpg");}
     100% {background-image: url("https://ae01.alicdn.com/kf/H100652e33735449f878c3ba450ad1756J/60x84cm-Marvel-Comic-Spider-Man-Super-hero-Spiderman-Movie-Posters-Cartoon-Canvas-Painting-By-numbers-poster.jpg");}
-  }
-  
-  /* Login */
-  input {
-    margin-top: .5em;
-    margin-bottom: .5em;
-  }
-
-  .form {
-    letter-spacing: 0.2em;
   }
 
   @media screen and (max-width: 500px) {
@@ -262,7 +270,12 @@ button:hover {
     }
   }
 
-  @media screen and (min-width: 1200px) {
+  @media screen and (min-width: 992px) {
+    .image-animate {
+        height: 700px;
+    }
+  }
+  @media screen and (max-width: 768px) {
     .image-animate {
         height: 700px;
     }

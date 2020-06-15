@@ -68,7 +68,7 @@ canvas{
   vertical-align:bottom;
 }
 
-/* ---- stats.js ---- */
+/* Login */
 .login {
   /*background: #000022;*/
   position: absolute;
@@ -76,6 +76,15 @@ canvas{
   left: 0;
   right: 0
 }
+
+  input {
+    margin-top: .5em;
+    margin-bottom: .5em;
+  }
+
+  .form {
+    letter-spacing: 0.2em;
+  }
 
 /* ---- particles.js container ---- */
 #particles-js{
