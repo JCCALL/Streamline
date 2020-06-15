@@ -140,6 +140,13 @@ button:hover {
     100% {width: 0%; right: 0;}
   }
 
+  input {
+    margin-top: .5em;
+    margin-bottom: .5em;
+  }
+
+  .form{
+    letter-spacing: 0.2em;
   @media screen and (max-width: 500px) {
     .title {
       font-size: 40px;

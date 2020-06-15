@@ -40,10 +40,9 @@ module.exports = function (app) {
     res.redirect('/')
   });
   });
-
   //post for login
   app.post("/api/login", function(req, res) {
-    db.User.findOne({ where: 
+    db.users.findOne({ where: 
       {
         username: req.body.username.trim(),
         password: req.body.password.trim()
