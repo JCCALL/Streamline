@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-    var Movies = sequelize.define("Movies", {
+    var Movies = sequelize.define("movies", {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -7,5 +7,13 @@ module.exports = function(sequelize, DataTypes) {
         }
     });
     
+    // Movies.associate = (models) =>{
+    //     Movies.belongsTo(models.Auser, {
+    //         foreignKey: {
+    //             allowNull: false
+    //         }
+    //     });
+    // };
+
     return Movies
 };

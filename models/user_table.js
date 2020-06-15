@@ -29,13 +29,18 @@ module.exports = function (sequelize, DataTypes) {
             }
         });
         
-         User.associate = function(models){
-            User.belongsToMany(models.Flix, {
-                through: "Movies",
-                as: "user",
-                foreignKey: "userID",
-                otherKey: "flixID"
+        User.associate = (models) => {
+            User.hasMany(models.Movies, {
+                onDelete: "cascade"
             });
-        }
+        };
+        //  User.associate = function(models){
+        //     User.belongsToMany(models.Flix, {
+        //         through: "Movies",
+        //         as: "user",
+        //         foreignKey: "userID",
+        //         otherKey: "flixID"
+        //     });
+        // }
     return User;
 };

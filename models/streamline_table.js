@@ -40,5 +40,12 @@ module.exports = function (sequelize, DataTypes) {
     //         otherKey: "userID"
     //      });
     //  }
+    // Flix.associate = (models) =>{
+    //     Flix.belongsTo(models.User, {
+    //         foreignKey: {
+    //             allowNull: false
+    //         }
+    //     });
+    // };
     return Flix;
 };
