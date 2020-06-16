@@ -1,7 +1,7 @@
 var bcrypt = require("bcrypt");
 
 module.exports = function (sequelize, DataTypes) {
-    var User = sequelize.define('users', {
+    var User = sequelize.define('Users', {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -29,13 +29,16 @@ module.exports = function (sequelize, DataTypes) {
             }
         });
         
-         User.associate = function(models){
-            User.belongsToMany(models.Streamline, {
-                through: "Movies",
-                as: "user",
-                foreignKey: "userID",
-                otherKey: "streamlineID"
-            });
+        User.associate= (models) => {
+            User.hasMany(models.Streamline, {
+                onDelete: "cascade"
+            })
         }
+        // User.associate = (models) => {
+        //     User.hasMany(models.Streamline, {
+        //         as: 'movie1',
+        //         foreignKey: 'userId'
+        //     })
+        // }
     return User;
 };

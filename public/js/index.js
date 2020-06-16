@@ -221,6 +221,7 @@ function openTabs(evt, showName) {
     evt.currentTarget.className += " active";
 }
 
+//shows password for login and newuser pages
 function showPassword() {
     var x = document.getElementById("myInput");
     if (x.type === "password") {
