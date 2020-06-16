@@ -5,7 +5,7 @@
 body {
   background: url("../images/film_overlay.png");
   background-color: rgb(26, 26, 26);
-  font-family: Arial;
+  font-family: 'Raleway', sans-serif;
   color: white;
   background-size: cover;
   background-repeat: no-repeat;
@@ -194,6 +194,10 @@ button:hover {
 }
 .watch-button, .details-button {
     margin: 0 5px 0 5px;
+}
+
+#footer {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 /* Header */
