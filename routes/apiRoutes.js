@@ -18,7 +18,7 @@ module.exports = function (app) {
   });
 
   app.get("/api/users", function(req, res) {
-    db.users.findAll({}).then(function(dbStreamline) {
+    db.Users.findAll({}).then(function(dbStreamline) {
       res.json(dbStreamline);
     });
   });
@@ -32,7 +32,7 @@ module.exports = function (app) {
 
   //post for new user
   app.post("/api/newuser", function(req, res) {
-    db.users.create({
+    db.Users.create({
       username: req.body.username,
       email: req.body.email,
       password: req.body.password
@@ -42,7 +42,7 @@ module.exports = function (app) {
   });
   //post for login
   app.post("/api/login", function(req, res) {
-    db.users.findOne({ where: 
+    db.Users.findOne({ where: 
       {
         username: req.body.username.trim(),
         password: req.body.password.trim()
@@ -53,15 +53,15 @@ module.exports = function (app) {
   });
   });
   //get for login, not finished
-  // app.get("/:id", function(req, res) {
-  //   db.Streamline.findAll({
-  //     where: {
-  //       userId: req.params.id
-  //     }
-  //   }).then(function(data) {
-  //     console.log(data)
-  //   })
-  // })
+  app.get("/:id", function(req, res) {
+    db.Streamline.findAll({
+      where: {
+        userId: req.params.id
+      }
+    }).then(function(data) {
+      console.log(data)
+    })
+  })
 
   // post to save search data
  app.post("/api/search", function (req, res) {

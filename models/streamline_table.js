@@ -32,7 +32,7 @@ module.exports = function (sequelize, DataTypes) {
     });
 
     Streamline.associate = (models) => {
-        Streamline.belongsTo(models.User, {
+        Streamline.belongsTo(models.Users, {
             foreignKey: {
                 allowNull: false
               }
