@@ -66,6 +66,10 @@ body {
     background-color: rgb(49, 98, 126);
 }
 
+.btn-primary:focus {
+  background-color: rgb(49, 98, 126);
+}
+
 /* Create an active/current tablink class */
 .tab button.active {
   background-color: rgb(104, 140, 161);
