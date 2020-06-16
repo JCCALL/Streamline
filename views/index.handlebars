@@ -1,25 +1,38 @@
-<div class="overlay">
-<div class="container p-0">
-    <div class="text-center" id="mainContain">
-        <div id="headTitle" class="py-5">
-            <h1 class="title">Stream<span class="line">Line</span></h1>
-            <div class="line-animate"></div>
+<div class="overlay"></div>
+<div class="container-fluid p-0">
+    <div class="line-animate"></div>
+    <div class="container main-container">
+        <div id="headTitle" class="py-5 heading">
+            <h1 class="title">StreamLine</h1>
+
             <!--<h4>Sit on your ass less! Find your shows faster!</h4>-->
-             <h4>Sit on your ass. Find your shows fast.</h4>
+            <h4>Sit on your ass. Find your shows fast.</h4>
             <!--<h4>Browse Less. Watch More.</h4>
             <small>(these are all tagline ideas)</small>-->
         </div>
+
+        <!-- This form will be where users input data about the movies -->
+        <div class="search-bar">
+            <form id="movie-form" action="POST">
+                <label class="search-text" for="movie-input">Search for a movie</label>
+                <input class="mx-2 search" type="text" id="movie-input" name="search">
+
+                <!-- This button will trigger our AJAX call -->
+                <input class="btn btn-primary" id="find-movie" type="submit" value="Search">
+            </form>
+        </div>
+
         <div id="headLogin">
 
             <!-- Button trigger login modal -->
-            <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#loginModal">
-                Login
-            </button>
+            <a href="/login"><button class="btn btn-primary mr-2 login">
+                    Login
+                </button></a>
 
             <!-- Button trigger register modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">
-                Register
-            </button>
+            <a href="/newuser"><button class="btn btn-primary mr-2 login">
+                    Register
+                </button>
         </div>
 
         <!-- Login Modal -->
@@ -103,21 +116,12 @@
         </div>
 
         <!-- Tab section -->
-        <div class="tab text-dark">
+        <div class="tab">
+            <button class="tablinks" onclick="openTabs(event, 'Default')"><i class="fa fa-home"
+                    aria-hidden="true"></i></button>
             <button class="tablinks" onclick="openTabs(event, 'Watchlist')">Watchlist</button>
             <button class="tablinks" onclick="openTabs(event, 'Favorites')">Loved</button>
             <button class="tablinks" onclick="openTabs(event, 'Watched')">Watched</button>
-           
-            <!-- This form will be where users input data about the movies -->
-            <div class="search-bar">
-            <form id="movie-form">
-            <label class="search-text" for="movie-input">Search for a movie</label>
-            <input class="mx-2 search" type="text" id="movie-input">
-
-            <!-- This button will trigger our AJAX call -->
-            <input class="btn btn-primary" id="find-movie" type="submit" value="Search">
-            </div>
-        </form>
         </div>
 
         <div id="Watchlist" class="tabcontent">
@@ -135,42 +139,78 @@
             <p>List of Watched Movies/Shows.</p>
         </div>
 
-        <!-- Movie results -->
-        <div id="movie-view">
-        </div>
-    </div>
-</div>
-</div>
-
-{{!-- 
-Keep this for now in case we need to reference the code
-<div id="home">
-    <div class="container">
-        <div class="row">
-            <div class="col-8 offset-2">
-                <form class="clearfix mb-4" action="POST">
-                    <div class="form-group">
-                        <label for="example-text"></label>
-                        <input type="text" id="example-text" class="form-control" aria-describedby="example-text"
-                            placeholder="Enter Example Text">
+        <div id="Default" class="tabcontent show-content">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="image-animate"></div>
+                </div>
+                <div class="col-md-6 text-center my-auto">
+                    <div class="py-4 py-md-0">
+                        <h3 class="pb-3 pt-3 pt-sm-0">Browse Less.<br>
+                            Watch More.</h3>
+                        <p>Welcome to StreamLine, your one-stop resource for finding where your favorite movies and
+                            shows are available to watch online. Create an account and start adding to your watchlist
+                            today!</p>
                     </div>
-                    <div class="form-group">
-                        <label for="example-description"></label>
-                        <textarea class="form-control" id="example-description" aria-describedby="example-description"
-                            placeholder="Enter Example Description"></textarea>
+                    <div class="tic-tac">
+                        <div class="row">
+                            <div class="col-6 steps step-1">
+                                <i class="fa step-icon fa-check-square-o" aria-hidden="true"></i>
+                                    <h5>
+                                        Create Your Account
+                                    </h5>
+                            </div>
+                            <div class="col-6 steps step-2">
+                                <i class="fa step-icon fa-search" aria-hidden="true"></i>
+                                    <h5>
+                                        Find Movies & Shows
+                                    </h5>
+                            </div>
+                            <div class="col-6 steps step-3">
+                                <i class="fa step-icon fa-play-circle" aria-hidden="true"></i>
+                                    <h5>
+                                        Add to Watchlist
+                                    </h5>
+                            </div>
+                            <div class="col-6 steps step-4">
+                                <i class="fa step-icon fa-heart-o" aria-hidden="true"></i>
+                                    <h5>
+                                        Save to Favorites
+                                    </h5>
+                            </div>
+                        </div>
                     </div>
-                    <button id="submit" class="btn btn-primary float-right">Submit</button>
-                </form>
-                <h3>Examples:</h3>
-                <ul id="example-list" class="list-group">
-                    {{#each examples}}
-                    <li data-id="{{this.id}}" class="list-group-item">
-                        <a href="example/{{this.id}}">{{this.text}}</a>
-                        <button class="btn btn-danger float-right delete">ｘ</button>
-                    </li>
-                    {{/each}}
-                </ul>
+                </div>
             </div>
         </div>
     </div>
-</div> --}}
+
+    <!-- Movie results -->
+    <div class="row movie-view" id="movie-view">
+    </div>
+
+    <!-- Movie Modal -->
+    <div class="modal fade" id="movieModal" tabindex="-1" role="dialog" aria-labelledby="movieModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Movie Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Add to Watchlist</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
