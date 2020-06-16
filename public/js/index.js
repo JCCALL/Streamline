@@ -189,10 +189,10 @@ $("#find-movie").on("click", function (event) {
                             utelly[i].locations[j].url + '><img class="location-icon img-fluid" src=' +
                             utelly[i].locations[j].icon + '></a><br>');
                     }
+                    $(locationList).append(streamingIcons, locationIcons);
                     if (streaming === true) {
                         streamingIcons.prepend('<p>Stream</p>');
                     }
-                    $(locationList).append(streamingIcons, locationIcons);
                 }
                 $(buttonDiv).append(detailsButton, watchButton);
                 $(streamingIcons).append(buttonDiv);
