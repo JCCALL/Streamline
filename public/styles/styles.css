@@ -52,13 +52,38 @@ Not necessary if using film_overlay.png
 
 /* Search bar */
 .search-bar {
-    border: none;
-    margin-bottom: 50px;
-    text-align: center;
+  width: 100%;
+  display: flex;
+  margin-bottom: 50px;
 }
 
 .search {
-    width: 30%;
+  width: 100%;
+  border: 5px solid rgb(104, 140, 161);
+  border-right: none;
+  padding: 5px;
+  height: 36px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #000000;
+}
+
+.searchButton {
+  width: 40px;
+  height: 36px;
+  border: 2px solid rgb(104, 140, 161);
+  background: rgb(104, 140, 161);
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/*Resize the wrap to see the search bar change!*/
+.wrap{
+  width: 30%;
+  margin: auto;
 }
 
 /* Change background color of buttons on hover */
