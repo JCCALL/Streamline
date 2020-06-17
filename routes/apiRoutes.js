@@ -37,7 +37,7 @@ module.exports = function (app) {
       email: req.body.email,
       password: req.body.password
     }).then(function(data){
-    res.redirect('/')
+    res.redirect('/' + data.id)
   });
   });
   //post for login
@@ -52,16 +52,6 @@ module.exports = function (app) {
       res.redirect('/' + data.id);
   });
   });
-  //get for login, not finished
-  // app.get("/:id", function(req, res) {
-  //   db.Streamline.findAll({
-  //     where: {
-  //       userId: req.params.id
-  //     }
-  //   }).then(function(data) {
-  //     console.log(data)
-  //   })
-  // })
 
   // post to save search data
  app.post("/api/search", function (req, res) {
