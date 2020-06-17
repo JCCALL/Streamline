@@ -4,10 +4,11 @@ module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
     db.Streamline.findAll({}).then(function(dbStreamline) {
-      res.render("index", {
-        msg: "Welcome!",
-        examples: dbStreamline
-      });
+        var examples = {
+            movies: dbStreamline
+        }
+        console.log(dbStreamline);
+      res.render("index", examples);
     });
   });
   // app.get("/", function(req, res) {
