@@ -87,7 +87,17 @@ module.exports = function (app) {
       crossDomain: true,
     }).then(function(response){
       console.log(response.data);
-      res.json(response.data)
+      res.json(response.data);
+
+    //   app.post("/api/newmovie", function(req, res) {
+    //     db.users.create({
+    //       username: req.body.username,
+    //       email: req.body.email,
+    //       password: req.body.password
+    //     }).then(function(data){
+    //     res.redirect('/')
+    //   });
+    //   });
     });
   });
   }
