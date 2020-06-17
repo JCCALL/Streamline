@@ -37,7 +37,7 @@ module.exports = function (app) {
       email: req.body.email,
       password: req.body.password
     }).then(function(data){
-    res.redirect('/')
+    res.redirect('/' + data.id)
   });
   });
   //post for login
