@@ -168,7 +168,7 @@ $("#find-movie").on("click", function (event) {
                     var detailsButton = '<button id="movieDetails' + [i] + '" value="' + imdbID + '" class="btn btn-primary details-button" data-toggle="modal" data-target="#movieModal' + [i] + '">Details</button>';
                     var locationList = $('<div class="location-list row">');
                     var streamingIcons = $('<div class="streaming-list col-6">');
-                    var locationIcons = $('<div class="rent-or-buy-list col-6"><p>Rent | Buy</p><div>');
+                    var locationIcons = $('<div class="rent-or-buy-list col-6"><p id="stream">Rent | Buy</p><div>');
                     for (var j = 0; j < utelly[i].locations.length; j++) {
                         var streaming = false;
                         var provider = utelly[i].locations[j].display_name;
@@ -190,7 +190,7 @@ $("#find-movie").on("click", function (event) {
                         $(locationList).append(streamingIcons, locationIcons);
                         // Labels streaming column in results if they exist
                         if (streaming === true) {
-                            streamingIcons.prepend('<p>Stream</p>');
+                            streamingIcons.prepend('<p id="stream">Stream</p>');
                         }
                     }
                     // Add to search
