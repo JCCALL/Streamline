@@ -53,15 +53,15 @@ module.exports = function (app) {
   });
   });
   //get for login, not finished
-  app.get("/:id", function(req, res) {
-    db.Streamline.findAll({
-      where: {
-        userId: req.params.id
-      }
-    }).then(function(data) {
-      console.log(data)
-    })
-  })
+  // app.get("/:id", function(req, res) {
+  //   db.Streamline.findAll({
+  //     where: {
+  //       userId: req.params.id
+  //     }
+  //   }).then(function(data) {
+  //     console.log(data)
+  //   })
+  // })
 
   // post to save search data
  app.post("/api/search", function (req, res) {
@@ -87,7 +87,17 @@ module.exports = function (app) {
       crossDomain: true,
     }).then(function(response){
       console.log(response.data);
-      res.json(response.data)
+      res.json(response.data);
+
+    //   app.post("/api/newmovie", function(req, res) {
+    //     db.users.create({
+    //       username: req.body.username,
+    //       email: req.body.email,
+    //       password: req.body.password
+    //     }).then(function(data){
+    //     res.redirect('/')
+    //   });
+    //   });
     });
   });
   }

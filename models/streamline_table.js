@@ -10,24 +10,19 @@ module.exports = function (sequelize, DataTypes) {
            type: DataTypes.STRING,
            allowNull: false
         }, 
-        description:{ 
-            type: DataTypes.TEXT
-        },
-        watchlist:{ 
-            type: DataTypes.BOOLEAN,
-            default: false,
+        image:{ 
+            type: DataTypes.STRING,
             allowNull: false
-             
         },
-        loved:{ 
-            type: DataTypes.BOOLEAN,
-            default: false,
-            allowNull: false
+        imdb: {
+            type: DataTypes.STRING,
+        },
+        imdbID: {
+            type: DataTypes.STRING,
         },
         watched:{ 
             type: DataTypes.BOOLEAN,
             default: false,
-            allowNull: false
         }
     });
 
