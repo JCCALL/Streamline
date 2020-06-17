@@ -11,15 +11,25 @@
         </div>
 
         <!-- This form will be where users input data about the movies -->
-        <div class="search-bar">
-            <form id="movie-form" action="POST">
-                <label class="search-text" for="movie-input">Search for a movie</label>
-                <input class="mx-2 search" type="text" id="movie-input" name="search">
+        <div class="search-bar-wrap">
+            <div class="search-bar">
+                <input class="search" type="text" id="movie-input" placeholder="Search for a movie" name="search">
 
                 <!-- This button will trigger our AJAX call -->
-                <input class="btn btn-primary" id="find-movie" type="submit" value="Search">
-            </form>
+                <button class="searchButton" id="find-movie" type="submit" value="Search"><i class="fa fa-search"></i>
+                </button>
+            </div>
         </div>
+
+        <!-- <div class="search-bar">
+            <form id="movie-form" action="POST">
+                <label class="search-text" for="movie-input">Search for a movie</label>
+                <input class="mx-2 search" type="text" id="movie-input" name="search"> -->
+
+            <!-- This button will trigger our AJAX call -->
+            <!-- <input class="btn btn-primary" id="find-movie" type="submit" value="Search">
+            </form>
+        </div> -->
 
         <div id="headLogin">
 
@@ -115,7 +125,7 @@
         </div>
 
         <!-- Tab section -->
-        <div class="tab">
+        <div class="tab mt-5">
             <button class="tablinks" onclick="openTabs(event, 'Default')"><i class="fa fa-home"
                     aria-hidden="true"></i></button>
             <button class="tablinks" onclick="openTabs(event, 'Watchlist')">Watchlist</button>
