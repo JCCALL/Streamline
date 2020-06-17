@@ -45,13 +45,25 @@ module.exports = function(app) {
   });
 
   // Load example page and pass in an example by id
-  app.get("/example/:id", function(req, res) {
-    db.Streamline.findOne({ where: { id: req.params.id } }).then(function(dbStreamline) {
-      res.render("example", {
-        example: dbStreamline
+  app.get("/:id", function(req, res) {
+      db.Users.findOne({
+        where: {
+          id: req.params.id
+        }
+      }).then(function(data) {
+        hbsObject = {data: data}
+        db.Streamline.findAll({
+          where: {
+            id: data.id
+          }
+        }).then(function(data) {
+          console.log('the data' + data.id)
+          hbsObject.data2 = data
+          console.log(hbsObject.data2)
+          res.render('index', hbsObject)
+        })
       });
-    });
-  });
+      });
 
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {
