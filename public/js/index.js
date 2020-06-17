@@ -1,14 +1,12 @@
-// Get references to page elements
-
-var $exampleText = $("#example-text");
-var $exampleDescription = $("#example-description");
-var $addtoWatchlist = $(".watch-button");
-var $exampleList = $("#example-list");
+// Create arrays
 var utellyResults = [];
 var omdbResults = [];
 var omdbIdArray = [];
 var utellyIdArray = [];
 var omdbFullData = [];
+
+var $watchList = $(".watchlist");
+var $watchedList = $("#watched-list");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -49,53 +47,49 @@ var API = {
             url: "api/utelly",
             type: "GET"
         })
+    },
+    updateMovie: function (id, watched) {
+        return $.ajax({
+            url: "api/examples/" + id,
+            type: "PUT",
+            data: watched
+        });
     }
 };
 
-// refreshExamples gets new examples from the db and repopulates the list
-var refreshExamples = function () {
-    API.getExamples().then(function (data) {
-        var $examples = data.map(function (example) {
-            var $a = $("<a>")
-                .text(example.movie)
-                .attr("href", "/example/" + example.id);
+// Refreshes Watchlists
+var refreshLists = function () {
+    $("#watched-list").load(location.href + " #watched-list>*","");
+    $("#watch-list").load(location.href + " #watch-list>*","");
+}
 
-            var $li = $("<li>")
-                .attr({
-                    class: "list-group-item",
-                    "data-id": example.id
-                })
-                .append($a);
-
-            var $button = $("<button>")
-                .addClass("btn btn-danger float-right delete")
-                .text("ｘ");
-
-            $li.append($button);
-
-            return $li;
-        });
-
-        $exampleList.empty();
-        $exampleList.append($examples);
-    });
-};
-
-// handleDeleteBtnClick is called when an example's delete button is clicked
-// Remove the example from the db and refresh the list
+// Deletes item from database
 var handleDeleteBtnClick = function () {
     var idToDelete = $(this)
         .parent()
         .attr("data-id");
-
     API.deleteExample(idToDelete).then(function () {
-        refreshExamples();
+        refreshLists();
     });
 };
 
-// Add event listeners to the submit and delete buttons
+// Mark as watched & refresh lists
+var changeWatch = function () {
+    var movieID = $(this)
+        .parent()
+        .attr("data-id");
+        var newWatch = $(this).data("newwatch");
+        var newWatched = {
+          watched: newWatch
+        };
+    API.updateMovie(movieID, newWatched).then(function () {
+        refreshLists();
+    });
+};
 
-$exampleList.on("click", ".delete", handleDeleteBtnClick);
+// Add event listeners to the update and delete buttons
+$(document).on("click", ".delete", handleDeleteBtnClick);
+$(document).on("click", ".change-watch", changeWatch);
 
 // Find movie
 $("#find-movie").on("click", function (event) {
@@ -203,7 +197,7 @@ $("#find-movie").on("click", function (event) {
                     $('#modal-create').append('<div class="modal fade" id="movieModal' + [i] + '" tabindex="-1" role="dialog" aria-labelledby="movieModalLabel" aria-hidden="true"><div id="modal-main' + [i] + '" class="modal-dialog modal-dialog-centered" role="document"></div></div>');
                     $('#modal-main' + [i]).append('<div class="modal-content" id="modal-content' + [i] + '"><div class="modal-header" id="modal-header' + [i] + '"></div></div>');
                     $('#modal-header' + [i]).append('<h4 class="modal-title" id="modal-title' + [i] + '"></h4><br><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>');
-                    $('#modal-content' + [i]).append('<div class="modal-body" id="modal-body' + [i] + '"></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button><button type="button" class="btn btn-primary" id=' + [i] + '>Add to Watchlist</button></div>');
+                    $('#modal-content' + [i]).append('<div class="modal-body" id="modal-body' + [i] + '"></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button><button type="button" class="btn btn-primary watch-button" id=' + [i] + '>Add to Watchlist</button></div>');
                     $('#modal-title' + [i]).append(omdbMatch.Title + movieYear);
                     $('#modal-body' + [i]).append(moviePoster);
                     // $('#modal-body' + [i]).append('<p class="movie-description">' + omdbFullData[0] + '</p>');
@@ -234,7 +228,7 @@ var handleFormSubmit = function (event) {
       console.log(addedMovie);
 
     API.saveExample(addedMovie).then(function () {
-        // refreshExamples();
+        refreshLists();
         console.log("added");
     });
 };

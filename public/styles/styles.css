@@ -63,11 +63,16 @@ Not necessary if using film_overlay.png
 
 /* Change background color of buttons on hover */
 .tab button:hover {
-  background-color: #ddd;
+  background-color: rgb(219, 237, 248);
 }
 
 .btn-primary {
     background-color: rgb(104, 140, 161);
+    border: none;
+}
+
+.btn-secondary {
+    background-color: rgb(27, 43, 51);
     border: none;
 }
 
@@ -82,6 +87,7 @@ Not necessary if using film_overlay.png
 /* Create an active/current tablink class */
 .tab button.active {
   background-color: rgb(104, 140, 161);
+  color: white;
   /* background-color: #ccc; */
 }
 
@@ -123,6 +129,21 @@ Not necessary if using film_overlay.png
     font-size: 50px;
     padding-bottom: 10px;
     color: rgb(104, 140, 161);
+}
+
+/* Watchlist */
+
+.list-group-item {
+    border: none;
+}
+
+.watchlist {
+    background-color: white;
+    padding-left: 0px;
+}
+
+.delete {
+    padding: 0 6px 0 6px;
 }
 
 /* Modal CSS */

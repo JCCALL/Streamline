@@ -7,7 +7,6 @@ module.exports = function(app) {
         var examples = {
             movies: dbStreamline
         }
-        console.log(dbStreamline);
       res.render("index", examples);
     });
   });

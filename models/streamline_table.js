@@ -29,7 +29,7 @@ module.exports = function (sequelize, DataTypes) {
     Streamline.associate = (models) => {
         Streamline.belongsTo(models.Users, {
             foreignKey: {
-                allowNull: false
+                allowNull: true
               }
         });
     };
