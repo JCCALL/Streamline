@@ -10,24 +10,13 @@
 
         <!-- This form will be where users input data about the movies -->
         <div class="search-bar-wrap">
-            <div class="search-bar">
-                <input class="search" type="text" id="movie-input" placeholder="Search for a movie" name="search">
-
+            <form class="search-bar" action="POST">
+                <input class="search" type="text" id="movie-input" placeholder="Search for a movie or show" name="search">
                 <!-- This button will trigger our AJAX call -->
                 <button class="searchButton" id="find-movie" type="submit" value="Search"><i class="fa fa-search"></i>
                 </button>
-            </div>
-        </div>
-
-        <!-- <div class="search-bar">
-            <form id="movie-form" action="POST">
-                <label class="search-text" for="movie-input">Search for a movie</label>
-                <input class="mx-2 search" type="text" id="movie-input" name="search"> -->
-
-            <!-- This button will trigger our AJAX call -->
-            <!-- <input class="btn btn-primary" id="find-movie" type="submit" value="Search">
             </form>
-        </div> -->
+        </div>
 
         <div id="headLogin">
 
@@ -143,7 +132,7 @@
 
         <!-- Movie results -->
         <div class="row movie-view" id="movie-view"></div>
-        <div class="posters-div">
+        <div class="hidden-posters-div">
             <img src="/images/movie-poster2.jpg">
             <img src="/images/movie-poster3.jpg">
             <img src="/images/movie-poster4.jpg">

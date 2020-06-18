@@ -53,30 +53,29 @@ Not necessary if using film_overlay.png
 /* Search bar */
 
 .search-bar-wrap{
-  width: 30%;
+  width: 40%;
   margin: auto;
 }
 
 .search-bar {
-
   display: flex;
 
 }
 
 .search {
-  width: 100%;
-  border: 5px solid rgb(104, 140, 161);
+  border: 3px solid rgb(104, 140, 161);
   border-right: none;
   padding: 5px;
-  height: 36px;
+  height: 40px;
   border-radius: 5px 0 0 5px;
   outline: none;
   color: #000000;
+  width: 100%;
 }
 
 .searchButton {
   width: 40px;
-  height: 36px;
+  height: 40px;
   border: 2px solid rgb(104, 140, 161);
   background: rgb(104, 140, 161);
   text-align: center;
@@ -187,13 +186,7 @@ Not necessary if using film_overlay.png
     width: 50%;
 }
 
-/* Movie results  */
-.bg-overlay {
-    /* background: rgba(0, 0, 0, 0.5);
-    width: 100%; 
-    height: 100%;
-    position: absolute; */
-}
+/* Movie search results  */
 
 .movie-header {
     text-align: center;
@@ -216,13 +209,16 @@ Not necessary if using film_overlay.png
 .location-icon {
     width: 100px;
     background-color: rgba(247, 254, 255, 0.9);
-    padding: 0 5px 0 5px;
+    padding: 1px 5px 1px 5px;
     border-radius: 4px;
     margin: 5px 0px 5px 0px;
 }
 
 .location-list {
-
+    color: white;
+    font-weight: bold;
+    text-shadow: 1px 2px 4px rgb(0, 0, 0);
+    padding-bottom: 30px;
 }
 
 .movie-view {
@@ -235,26 +231,38 @@ Not necessary if using film_overlay.png
     background-color: rgba(247, 254, 255);
     width: 48%;
     margin-top: 30px;
-    padding: 0 0 20px 0;
+    padding: 0 0 35px 0;
     background-size: cover;
+    position: relative;
 }
 
+.stream-heading {
+    padding-left: 18px;
+}
+
+.rent-heading {
+    padding-right: 5px;
+}
 .streaming-list {
-    float: left;
     padding-top: 10px;
-    text-align: center;
+    padding-left: 25px;
+    text-align: left;
     text-transform: uppercase;
 }
 .rent-or-buy-list {
-    float: right;
     padding-top: 10px;
-    text-align: center;
     text-transform: uppercase;
+    padding-right: 25px;
+    text-align: right;
 }
 .watch-details-buttons {
-    width: 100%;
+    /* width: 100%;
+    margin-top: 15px; */
     text-align: center;
-    margin-top: 15px;
+    bottom: 8px;
+    left: 0;
+    right: 0;
+    position: absolute;
 }
 .watch-button, .details-button {
     margin: 0 5px 0 5px;
@@ -293,9 +301,8 @@ Not necessary if using film_overlay.png
     100% {width: 0%; right: 0;}
   }
 
-
 /* changing image animation */
-.posters-div {
+.hidden-posters-div {
     display: none;
 }
 
@@ -324,7 +331,7 @@ Not necessary if using film_overlay.png
       font-size: 40px;
     }
     .search-bar-wrap {
-        width: 80%;
+        width: 90%;
         margin-bottom: 30px;
     }
     .login {
@@ -344,12 +351,20 @@ Not necessary if using film_overlay.png
         height: 700px;
     }
   }
+
+  @media screen and (max-width: 992px) {
+    .search-bar-wrap {
+        width: 60%;
+        margin-bottom: 30px;
+      }
+  }
+
   @media screen and (max-width: 768px) {
     .image-animate {
         height: 700px;
     }
     .search-bar-wrap {
-      width: 50%;
+      width: 75%;
       margin-bottom: 30px;
     }
   }

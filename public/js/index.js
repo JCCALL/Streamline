@@ -87,9 +87,10 @@ var changeWatch = function () {
     });
 };
 
-// Add event listeners to the update and delete buttons
+// Add event listeners to the update, delete, and details buttons
 $(document).on("click", ".delete", handleDeleteBtnClick);
 $(document).on("click", ".change-watch", changeWatch);
+// $(document).on("click", ".details-button", omdbSearch);
 
 // Find movie
 $("#find-movie").on("click", function (event) {
@@ -129,6 +130,7 @@ $("#find-movie").on("click", function (event) {
     API.saveSearch(search).then(function () {
         API.getMovie(movie).then(function (response) {
             utellyResults.push(response);
+            console.log(utellyResults);
             var utelly = utellyResults[0].results;
             for (var i = 0; i < utelly.length; i++) {
                 var imdbID = utelly[i].external_ids.imdb.id;
@@ -161,32 +163,30 @@ $("#find-movie").on("click", function (event) {
                     var watchButton = '<button id="' + [i] + '" value="' + omdbIndex + '" class="btn btn-primary watch-button">Add to Watchlist</button>';
                     var detailsButton = '<button id="movieDetails' + [i] + '" value="' + imdbID + '" class="btn btn-primary details-button" data-toggle="modal" data-target="#movieModal' + [i] + '">Details</button>';
                     var locationList = $('<div class="location-list row">');
-                    var streamingIcons = $('<div class="streaming-list col-6">');
-                    var locationIcons = $('<div class="rent-or-buy-list col-6"><p>Rent | Buy</p><div>');
+                    var streamingIcons = $('<div class="streaming-list col-6"><div class="stream-heading">Stream</div></div>');
+                    var locationIcons = $('<div class="rent-or-buy-list col-6"><div class="rent-heading">Rent | Buy</div><div>');
                     for (var j = 0; j < utelly[i].locations.length; j++) {
-                        var streaming = false;
                         var provider = utelly[i].locations[j].display_name;
                         // Divides streaming subscriptions from rent/buy
-                        if (provider === 'Netflix' || provider === 'Amazon Prime Video' || provider === 'Disney+' || provider === 'HBO' || provider === 'Hulu') {
-                            streaming = true;
+                        if (provider === 'Netflix' || provider === 'Amazon Prime Video' || provider === 'Disney+' || provider === 'HBO') {
                             $(streamingIcons).append('<a target="_blank" class="streaming-link" href=' +
                                 utelly[i].locations[j].url + '><img class="location-icon img-fluid" src=' +
                                 utelly[i].locations[j].icon + '></a><br>');
-                            // Excludes Atom Tickets from search
-                        } else if (provider === 'AtomTicketsIVAUS') {
+                          // Gives Hulu a custom icon
+                        } else if (provider === 'Hulu') {
+                            $(streamingIcons).append('<a target="_blank" class="streaming-link" href=' +
+                                utelly[i].locations[j].url + '><img class="location-icon img-fluid" src="/images/hulu.png"></a><br>');
+                        // Excludes items without icons from search
+                        } else if (provider === 'AtomTicketsIVAUS' || provider === 'NOT_SETIVAUS') {
                             // Returns rent/buy options
                         } else {
-                            streaming = false;
                             $(locationIcons).append('<a target="_blank" class="rent-or-buy-link" href=' +
                                 utelly[i].locations[j].url + '><img class="location-icon img-fluid" src=' +
                                 utelly[i].locations[j].icon + '></a><br>');
                         }
-                        $(locationList).append(streamingIcons, locationIcons);
-                        // Labels streaming column in results if they exist
-                        if (streaming === true) {
-                            streamingIcons.prepend('<p>Stream</p>');
-                        }
+                        $(locationList).append(streamingIcons, locationIcons);   
                     }
+
                     // Add to search
                     $(buttonDiv).append(detailsButton, watchButton);
                     $(streamingIcons).append(buttonDiv);
@@ -212,7 +212,6 @@ $("#find-movie").on("click", function (event) {
 var handleFormSubmit = function (event) {
     event.preventDefault();
     var movieIndex = this.id;
-    console.log(this.id);
     var movieMatch = utellyResults[0].results[movieIndex];
     var moviePic = movieMatch.picture;
     var movieTitle = movieMatch.name;
