@@ -4,14 +4,14 @@ var api_key = process.env.API_KEY;
 
 
 module.exports = function (app) {
-  // Get all examples
+  // Get watchlist
   app.get("/api/examples", function (req, res) {
     db.Streamline.findAll({}).then(function (dbStreamline) {
       res.json(dbStreamline);
     });
   });
 
-  // Create a new example
+  // Add to watchlist
   app.post("/api/examples", function (req, res) {
     db.Streamline.create(req.body).then(function (dbStreamline) {
       res.json(dbStreamline);
@@ -24,11 +24,23 @@ module.exports = function (app) {
     });
   });
 
-  // Delete an example by id
+  // Delete a movie by id
   app.delete("/api/examples/:id", function (req, res) {
     db.Streamline.destroy({ where: { id: req.params.id } }).then(function (dbStreamline) {
       res.json(dbStreamline);
     });
+  });
+
+  // Mark as watched
+  app.put("/api/examples/:id", function(req, res) {
+    db.Streamline.update({ 
+        watched: req.body.watched
+      }, {
+        where: {id: req.params.id},
+      })
+      .then(function(dbStreamline){
+        res.json(dbStreamline);
+    })
   });
 
   //post for new user
@@ -49,7 +61,6 @@ module.exports = function (app) {
         password: req.body.password.trim()
       }
     }).then(function(data) {
-      console.log(data);
       res.redirect('/' + data.id);
   });
   });
@@ -91,7 +102,6 @@ module.exports = function (app) {
       async: true,
       crossDomain: true,
     }).then(function(response){
-      console.log(response.data);
       res.json(response.data);
 
     //   app.post("/api/newmovie", function(req, res) {
