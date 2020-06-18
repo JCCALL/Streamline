@@ -204,6 +204,7 @@ $("#find-movie").on("click", function (event) {
                     $('#modal-create').append('<div class="modal fade" id="movieModal' + [i] + '" tabindex="-1" role="dialog" aria-labelledby="movieModalLabel" aria-hidden="true"><div id="modal-main' + [i] + '" class="modal-dialog modal-dialog-centered" role="document"></div></div>');
                     $('#modal-main' + [i]).append('<div class="modal-content" id="modal-content' + [i] + '"><div class="modal-header" id="modal-header' + [i] + '"></div></div>');
                     $('#modal-header' + [i]).append('<h4 class="modal-title" id="modal-title' + [i] + '"></h4><br><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>');
+
                     $('#modal-content' + [i]).append('<div class="modal-body" id="modal-body' + [i] + '"></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button><button type="button" class="btn btn-primary watch-button" id=' + [i] + '>Add to Watchlist</button></div>');
                     $('#modal-title' + [i]).append(omdbMatch.Title + movieYear);
                     $('#modal-body' + [i]).append(moviePoster);
@@ -230,9 +231,9 @@ var handleFormSubmit = function (event) {
         imdb: imdbLink,
         imdbID: searchID,
         watched: false
+        //UserId: "/:id"
       };
       console.log(addedMovie);
-
     API.saveExample(addedMovie).then(function () {
         refreshLists();
         console.log("added");

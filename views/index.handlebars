@@ -27,8 +27,7 @@
 
             <!-- Button trigger register -->
             <a href="/newuser"><button class="btn btn-primary mr-2 login">
-                    Register
-                </button></a>
+                    Register</button></a>
         </div>
 
         <!-- Tab section -->
@@ -69,6 +68,7 @@
         </div>
 
         <div id="Watched" class="tabcontent">
+
             <ul class="watchlist row" id="watched-list">
                 {{#each movies}}
                 {{#if this.dataValues.watched}}
@@ -83,6 +83,7 @@
                 {{/if}}
                 {{/each}}
             </ul>
+
         </div>
 
         <div id="Default" class="tabcontent show-content">

@@ -25,7 +25,13 @@ module.exports = function(app) {
       layout: 'main'
     });
   });
-
+  
+  app.get("/logout", function(req, res) {
+    res.render("logout", {
+      layout: 'main'
+    });
+  });
+  
   app.get("/home", function(req, res) {
     db.Streamline.findAll({}).then(function(dbStreamline) {
       res.render("home", {
@@ -44,6 +50,24 @@ module.exports = function(app) {
     });
   });
 
+  // Load example page and pass in an example by id
+  app.get("/:id", function(req, res) {
+      db.Users.findOne({
+        where: {
+          id: req.params.id
+        }
+      }).then(function(data) {
+        db.Streamline.findAll({
+          where: {
+            UserId: req.params.id
+          }
+        }).then(function(data) {
+          console.log(data)
+
+        })
+        res.render('index')
+      })
+  });
 
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {

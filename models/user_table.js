@@ -34,11 +34,6 @@ module.exports = function (sequelize, DataTypes) {
                 onDelete: "cascade"
             })
         }
-        // User.associate = (models) => {
-        //     User.hasMany(models.Streamline, {
-        //         as: 'movie1',
-        //         foreignKey: 'userId'
-        //     })
-        // }
+        
     return User;
 };
