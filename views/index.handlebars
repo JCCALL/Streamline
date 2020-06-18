@@ -122,7 +122,7 @@
             <button class="tablinks" onclick="openTabs(event, 'Default')"><i class="fa fa-home"
                     aria-hidden="true"></i></button>
             <button class="tablinks" onclick="openTabs(event, 'Watchlist')">Watchlist</button>
-            <button class="tablinks" onclick="openTabs(event, 'Favorites')">Loved</button>
+            {{!-- <button class="tablinks" onclick="openTabs(event, 'Favorites')">Loved</button> --}}
             <button class="tablinks" onclick="openTabs(event, 'Watched')">Watched</button>
         </div>
 
@@ -145,8 +145,8 @@
                 <li data-id="{{this.dataValues.id}}" class="list-group-item">
                     <h4>{{this.dataValues.movie}}</h4>
                     <img class="watch-picture img-fluid" src="{{this.dataValues.image}}">
-                    <button class="btn btn-primary float-right delete">ｘ</button>
-                    <button class="change-watch btn btn-primary" data-id="{{id}}" data-neweat="true">
+                    <button class="btn btn-primary float-right delete" method="DELETE" action="/api/examples/:id">ｘ</button>
+                    <button method="PUT" action="/api/watched" type="submit" class="change-watch btn btn-primary" data-id="{{id}}" data-neweat="true">
                     Watched
                 </button>
                 </li>
@@ -154,10 +154,10 @@
             {{/each}}
         </div>
 
-        <div id="Favorites" class="tabcontent">
+        {{!-- <div id="Favorites" class="tabcontent">
             <h3>My Favorites!</h3>
             <p>List of Favorited Movies/Shows</p>
-        </div>
+        </div> --}}
 
         <div id="Watched" class="tabcontent">
             <h3>Everything from my Watchlist that I have Watched!</h3>
