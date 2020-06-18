@@ -2,6 +2,7 @@ var db = require("../models");
 var axios = require("axios");
 var api_key = process.env.API_KEY;
 
+
 module.exports = function (app) {
   // Get all examples
   app.get("/api/examples", function (req, res) {
@@ -37,7 +38,7 @@ module.exports = function (app) {
       email: req.body.email,
       password: req.body.password
     }).then(function(data){
-    res.redirect('/' + data.id)
+    res.redirect('/' + data.id);
   });
   });
   //post for login
@@ -91,4 +92,3 @@ module.exports = function (app) {
     });
   });
   }
-
