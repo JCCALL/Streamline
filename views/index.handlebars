@@ -34,11 +34,13 @@
         <div class="tab mt-5">
             <button class="tablinks" onclick="openTabs(event, 'Default')"><i class="fa fa-home"
                     aria-hidden="true"></i></button>
+
             <button class="tablinks" onclick="openTabs(event, 'Watchlist')"><i class="fa fa-film pr-2"
                     aria-hidden="true"></i>Watchlist</button>
             <button class="tablinks" onclick="openTabs(event, 'Watched')"><i class="fa fa-check-square-o pr-2" aria-hidden="true"></i>Watched</button>
             <button class="tablinks" onclick="openTabs(event, 'Favorites')"><i class="fa fa-heart-o pr-2"
                     aria-hidden="true"></i>Loved</button>
+
         </div>
 
         <div id="Watchlist" class="tabcontent">
@@ -49,6 +51,7 @@
                     <button class="btn btn-secondary float-right delete"><i class="fa fa-remove" aria-hidden="true"></i></button>
                     <h4>{{this.dataValues.movie}}</h4>
                     <img class="watch-picture img-fluid" src="{{this.dataValues.image}}">
+
                     <button class="change-watch btn btn-primary" data-id="{{this.dataValues.imdbID}}"
                         data-neweat="true">
                         <i class="fa fa-play-circle pr-2" aria-hidden="true"></i>Watch
@@ -56,16 +59,17 @@
                     <button class="change-watch btn btn-primary" data-id="{{this.dataValues.id}}" data-newwatch="true">
                         <i class="fa fa-check-square-o pr-2" aria-hidden="true"></i>Watched
                     </button>
+
                 </li>
                 {{/unless}}
                 {{/each}}
             </ul>
         </div>
 
-        <div id="Favorites" class="tabcontent">
+        {{!-- <div id="Favorites" class="tabcontent">
             <h3>My Favorites!</h3>
             <p>List of Favorited Movies/Shows</p>
-        </div>
+        </div> --}}
 
         <div id="Watched" class="tabcontent">
 

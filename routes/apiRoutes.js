@@ -64,7 +64,21 @@ module.exports = function (app) {
       res.redirect('/' + data.id);
   });
   });
+  
+  // put to move watchlist to watched
+  app.put("/api/watched", function(req, res) {
+    db.Streamline.update({
+      watched: true,
+    }, {
+      where: {
+        id: req.body.id
+      }
+    }).then(function(data) {
+      res.json(data)
+    });
+  });
 
+  
   // post to save search data
  app.post("/api/search", function (req, res) {
     movie = req.body.search;
