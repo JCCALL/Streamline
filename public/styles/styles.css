@@ -268,7 +268,12 @@ Not necessary if using film_overlay.png
     100% {width: 0%; right: 0;}
   }
 
+
 /* changing image animation */
+.posters-div {
+    display: none;
+}
+
 .image-animate {
     background-color: black;
     background-image: url("/images/movie-poster1.jpg");
