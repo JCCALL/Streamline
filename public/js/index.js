@@ -163,8 +163,8 @@ $("#find-movie").on("click", function (event) {
                     var watchButton = '<button id="' + [i] + '" value="' + omdbIndex + '" class="btn btn-primary watch-button">Add to Watchlist</button>';
                     var detailsButton = '<button id="movieDetails' + [i] + '" value="' + imdbID + '" class="btn btn-primary details-button" data-toggle="modal" data-target="#movieModal' + [i] + '">Details</button>';
                     var locationList = $('<div class="location-list row">');
-                    var streamingIcons = $('<div class="streaming-list col-6"><div class="stream-heading">Stream</div></div>');
-                    var locationIcons = $('<div class="rent-or-buy-list col-6"><div class="rent-heading">Rent | Buy</div><div>');
+                    var streamingIcons = $('<div class="streaming-list col-6">');
+                    var locationIcons = $('<div class="rent-or-buy-list col-6"><p id="stream">Rent | Buy</p><div>');
                     for (var j = 0; j < utelly[i].locations.length; j++) {
                         var provider = utelly[i].locations[j].display_name;
                         // Divides streaming subscriptions from rent/buy
@@ -184,7 +184,11 @@ $("#find-movie").on("click", function (event) {
                                 utelly[i].locations[j].url + '><img class="location-icon img-fluid" src=' +
                                 utelly[i].locations[j].icon + '></a><br>');
                         }
-                        $(locationList).append(streamingIcons, locationIcons);   
+                        $(locationList).append(streamingIcons, locationIcons);
+                        // Labels streaming column in results if they exist
+                        if (streaming === true) {
+                            streamingIcons.prepend('<p id="stream">Stream</p>');
+                        } 
                     }
 
                     // Add to search
