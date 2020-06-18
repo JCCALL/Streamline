@@ -191,7 +191,7 @@ $("#find-movie").on("click", function (event) {
                         // Labels streaming column in results if they exist
                         if (streaming === true) {
                             streamingIcons.prepend('<p id="stream">Stream</p>');
-                        }
+                        } 
                     }
                     // Add to search
                     $(buttonDiv).append(detailsButton, watchButton);
