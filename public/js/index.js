@@ -1,14 +1,12 @@
-// Get references to page elements
-
-var $exampleText = $("#example-text");
-var $exampleDescription = $("#example-description");
-var $addtoWatchlist = $(".watch-button");
-var $exampleList = $("#example-list");
+// Create arrays
 var utellyResults = [];
 var omdbResults = [];
 var omdbIdArray = [];
 var utellyIdArray = [];
 var omdbFullData = [];
+
+var $watchList = $(".watchlist");
+var $watchedList = $("#watched-list");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -49,53 +47,50 @@ var API = {
             url: "api/utelly",
             type: "GET"
         })
+    },
+    updateMovie: function (id, watched) {
+        return $.ajax({
+            url: "api/examples/" + id,
+            type: "PUT",
+            data: watched
+        });
     }
 };
 
-// refreshExamples gets new examples from the db and repopulates the list
-var refreshExamples = function () {
-    API.getExamples().then(function (data) {
-        var $examples = data.map(function (example) {
-            var $a = $("<a>")
-                .text(example.movie)
-                .attr("href", "/example/" + example.id);
+// Refreshes Watchlists
+var refreshLists = function () {
+    $("#watched-list").load(location.href + " #watched-list>*","");
+    $("#watch-list").load(location.href + " #watch-list>*","");
+}
 
-            var $li = $("<li>")
-                .attr({
-                    class: "list-group-item",
-                    "data-id": example.id
-                })
-                .append($a);
-
-            var $button = $("<button>")
-                .addClass("btn btn-danger float-right delete")
-                .text("ｘ");
-
-            $li.append($button);
-
-            return $li;
-        });
-
-        $exampleList.empty();
-        $exampleList.append($examples);
-    });
-};
-
-// handleDeleteBtnClick is called when an example's delete button is clicked
-// Remove the example from the db and refresh the list
+// Deletes item from database
 var handleDeleteBtnClick = function () {
     var idToDelete = $(this)
         .parent()
         .attr("data-id");
-
     API.deleteExample(idToDelete).then(function () {
-        refreshExamples();
+        refreshLists();
     });
 };
 
-// Add event listeners to the submit and delete buttons
+// Mark as watched & refresh lists
+var changeWatch = function () {
+    var movieID = $(this)
+        .parent()
+        .attr("data-id");
+        var newWatch = $(this).data("newwatch");
+        var newWatched = {
+          watched: newWatch
+        };
+    API.updateMovie(movieID, newWatched).then(function () {
+        refreshLists();
+    });
+};
 
-$exampleList.on("click", ".delete", handleDeleteBtnClick);
+// Add event listeners to the update, delete, and details buttons
+$(document).on("click", ".delete", handleDeleteBtnClick);
+$(document).on("click", ".change-watch", changeWatch);
+// $(document).on("click", ".details-button", omdbSearch);
 
 // Find movie
 $("#find-movie").on("click", function (event) {
@@ -135,6 +130,7 @@ $("#find-movie").on("click", function (event) {
     API.saveSearch(search).then(function () {
         API.getMovie(movie).then(function (response) {
             utellyResults.push(response);
+            console.log(utellyResults);
             var utelly = utellyResults[0].results;
             for (var i = 0; i < utelly.length; i++) {
                 var imdbID = utelly[i].external_ids.imdb.id;
@@ -170,19 +166,20 @@ $("#find-movie").on("click", function (event) {
                     var streamingIcons = $('<div class="streaming-list col-6">');
                     var locationIcons = $('<div class="rent-or-buy-list col-6"><p id="stream">Rent | Buy</p><div>');
                     for (var j = 0; j < utelly[i].locations.length; j++) {
-                        var streaming = false;
                         var provider = utelly[i].locations[j].display_name;
                         // Divides streaming subscriptions from rent/buy
-                        if (provider === 'Netflix' || provider === 'Amazon Prime Video' || provider === 'Disney+' || provider === 'HBO' || provider === 'Hulu') {
-                            streaming = true;
+                        if (provider === 'Netflix' || provider === 'Amazon Prime Video' || provider === 'Disney+' || provider === 'HBO') {
                             $(streamingIcons).append('<a target="_blank" class="streaming-link" href=' +
                                 utelly[i].locations[j].url + '><img class="location-icon img-fluid" src=' +
                                 utelly[i].locations[j].icon + '></a><br>');
-                            // Excludes Atom Tickets from search
-                        } else if (provider === 'AtomTicketsIVAUS') {
+                          // Gives Hulu a custom icon
+                        } else if (provider === 'Hulu') {
+                            $(streamingIcons).append('<a target="_blank" class="streaming-link" href=' +
+                                utelly[i].locations[j].url + '><img class="location-icon img-fluid" src="/images/hulu.png"></a><br>');
+                        // Excludes items without icons from search
+                        } else if (provider === 'AtomTicketsIVAUS' || provider === 'NOT_SETIVAUS') {
                             // Returns rent/buy options
                         } else {
-                            streaming = false;
                             $(locationIcons).append('<a target="_blank" class="rent-or-buy-link" href=' +
                                 utelly[i].locations[j].url + '><img class="location-icon img-fluid" src=' +
                                 utelly[i].locations[j].icon + '></a><br>');
@@ -193,17 +190,26 @@ $("#find-movie").on("click", function (event) {
                             streamingIcons.prepend('<p id="stream">Stream</p>');
                         } 
                     }
+
                     // Add to search
                     $(buttonDiv).append(detailsButton, watchButton);
                     $(streamingIcons).append(buttonDiv);
                     $(movieDiv).append(bgOverlay, movieTitle, locationList, buttonDiv);
                     $("#movie-view").append(movieDiv);
                     
-                    //Create modal
+                    //Clear out previous modal with same ID           
+                    $('#modal-main' + [i]).html("");
+                    $('#modal-header' + [i]).html("");
+                    $('#modal-content' + [i]).html("");
+                    $('#modal-title' + [i]).html("");
+                    $('#modal-body' + [i]).html("");
+
+                    // Create modal
                     $('#modal-create').append('<div class="modal fade" id="movieModal' + [i] + '" tabindex="-1" role="dialog" aria-labelledby="movieModalLabel" aria-hidden="true"><div id="modal-main' + [i] + '" class="modal-dialog modal-dialog-centered" role="document"></div></div>');
                     $('#modal-main' + [i]).append('<div class="modal-content" id="modal-content' + [i] + '"><div class="modal-header" id="modal-header' + [i] + '"></div></div>');
                     $('#modal-header' + [i]).append('<h4 class="modal-title" id="modal-title' + [i] + '"></h4><br><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>');
-                    $('#modal-content' + [i]).append('<div class="modal-body" id="modal-body' + [i] + '"></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button><button type="button" class="btn btn-primary" id=' + [i] + '>Add to Watchlist</button></div>');
+
+                    $('#modal-content' + [i]).append('<div class="modal-body" id="modal-body' + [i] + '"></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button><button type="button" class="btn btn-primary watch-button" id=' + [i] + '>Add to Watchlist</button></div>');
                     $('#modal-title' + [i]).append(omdbMatch.Title + movieYear);
                     $('#modal-body' + [i]).append(moviePoster);
                     // $('#modal-body' + [i]).append('<p class="movie-description">' + omdbFullData[0] + '</p>');
@@ -218,7 +224,6 @@ $("#find-movie").on("click", function (event) {
 var handleFormSubmit = function (event) {
     event.preventDefault();
     var movieIndex = this.id;
-    console.log(this.id);
     var movieMatch = utellyResults[0].results[movieIndex];
     var moviePic = movieMatch.picture;
     var movieTitle = movieMatch.name;
@@ -230,11 +235,11 @@ var handleFormSubmit = function (event) {
         imdb: imdbLink,
         imdbID: searchID,
         watched: false
+        //UserId: "/:id"
       };
       console.log(addedMovie);
-
     API.saveExample(addedMovie).then(function () {
-        // refreshExamples();
+        refreshLists();
         console.log("added");
     });
 };

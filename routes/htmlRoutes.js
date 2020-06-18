@@ -7,7 +7,6 @@ module.exports = function(app) {
         var examples = {
             movies: dbStreamline
         }
-        console.log(dbStreamline);
       res.render("index", examples);
     });
   });
@@ -26,7 +25,13 @@ module.exports = function(app) {
       layout: 'main'
     });
   });
-
+  
+  app.get("/logout", function(req, res) {
+    res.render("logout", {
+      layout: 'main'
+    });
+  });
+  
   app.get("/home", function(req, res) {
     db.Streamline.findAll({}).then(function(dbStreamline) {
       res.render("home", {
@@ -52,19 +57,17 @@ module.exports = function(app) {
           id: req.params.id
         }
       }).then(function(data) {
-        hbsObject = {data: data}
         db.Streamline.findAll({
           where: {
-            id: data.id
+            UserId: req.params.id
           }
         }).then(function(data) {
-          console.log('the data' + data.id)
-          hbsObject.data2 = data
-          console.log(hbsObject.data2)
-          res.render('index', hbsObject)
+          console.log(data)
+
         })
-      });
-      });
+        res.render('index')
+      })
+  });
 
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {
