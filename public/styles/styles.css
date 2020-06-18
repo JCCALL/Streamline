@@ -277,16 +277,6 @@ Not necessary if using film_overlay.png
     text-align: center;
 }
 
-/* Footer */
-#footer {
-  font-family: 'Times New Roman', Times, serif;
-}
-
-#stream {
-  color: white;
-  text-shadow: 2px 2px black;
-}
-
 .title {
     text-transform: uppercase;
     font-weight: bold;
