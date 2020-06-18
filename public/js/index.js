@@ -193,7 +193,14 @@ $("#find-movie").on("click", function (event) {
                     $(movieDiv).append(bgOverlay, movieTitle, locationList, buttonDiv);
                     $("#movie-view").append(movieDiv);
                     
-                    //Create modal
+                    //Clear out previous modal with same ID           
+                    $('#modal-main' + [i]).html("");
+                    $('#modal-header' + [i]).html("");
+                    $('#modal-content' + [i]).html("");
+                    $('#modal-title' + [i]).html("");
+                    $('#modal-body' + [i]).html("");
+
+                    // Create modal
                     $('#modal-create').append('<div class="modal fade" id="movieModal' + [i] + '" tabindex="-1" role="dialog" aria-labelledby="movieModalLabel" aria-hidden="true"><div id="modal-main' + [i] + '" class="modal-dialog modal-dialog-centered" role="document"></div></div>');
                     $('#modal-main' + [i]).append('<div class="modal-content" id="modal-content' + [i] + '"><div class="modal-header" id="modal-header' + [i] + '"></div></div>');
                     $('#modal-header' + [i]).append('<h4 class="modal-title" id="modal-title' + [i] + '"></h4><br><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>');
