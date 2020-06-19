@@ -144,8 +144,8 @@ $("#find-movie").on("click", function (event) {
                     method: "GET"
                 }).then(function (response) {
                     console.log(response);
-                    omdbFullData.push(response.Plot);
-                    console.log(omdbFullData);       
+                    omdbFullData.push(response);
+                    console.log(omdbFullData);      
                 });
                 // Takes out movies if they're not in OMDB
                 if (omdbIndex > -1) {
@@ -225,13 +225,18 @@ var handleFormSubmit = function (event) {
     var movieTitle = movieMatch.name;
     var imdbLink = movieMatch.external_ids.imdb.url;
     var searchID = movieMatch.external_ids.imdb.id;
+    // grab id in url
+    var fullURL = window.location.pathname;
+    var halfURL = fullURL.split('/', 2);
+    var userID = halfURL[1];
+
     var addedMovie = {
         movie: movieTitle,
         image: moviePic,
         imdb: imdbLink,
         imdbID: searchID,
-        watched: false
-        //UserId: "/:id"
+        watched: false,
+        UserId: userID
       };
       console.log(addedMovie);
     API.saveExample(addedMovie).then(function () {
