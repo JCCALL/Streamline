@@ -5,7 +5,7 @@
 body {
   background: url("../images/film_overlay.png");
   background-color: rgb(26, 26, 26);
-  font-family: Arial;
+  font-family: 'Poppins', sans-serif;
   color: white;
   background-size: cover;
   background-repeat: no-repeat;
@@ -283,7 +283,7 @@ Not necessary if using film_overlay.png
 
 /* Footer */
 #footer {
-  font-family: 'Times New Roman', Times, serif;
+  /* font-family: 'Times New Roman', Times, serif; */
 }
 
 #stream {
