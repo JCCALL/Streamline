@@ -201,12 +201,6 @@ $("#find-movie").on("click", function (event) {
                                 utelly[i].locations[j].icon + '></a><br>');
                         }
                         $(locationList).append(streamingIcons, locationIcons);
-<<<<<<< HEAD
-                        // Labels streaming column in results if they exist
-                        
-=======
-
->>>>>>> bebe2d3686209b2da12c499ac3579507d4e55c93
                     }
 
                     // Add to search
@@ -262,7 +256,7 @@ var handleFormSubmit = function (event) {
       console.log(addedMovie);
     API.saveExample(addedMovie).then(function () {
         refreshLists();
-        console.log("added");
+        alert("added");
     });
 };
 
