@@ -16,6 +16,10 @@ body {
   margin-bottom: 40px;
 }
 
+#loved{
+  color: crimson;
+}
+
 /* 
 Not necessary if using film_overlay.png
 .overlay {

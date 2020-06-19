@@ -7,6 +7,7 @@ var omdbFullData = [];
 
 var $watchList = $(".watchlist");
 var $watchedList = $("#watched-list");
+//var $lovedList = $("")
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -54,6 +55,13 @@ var API = {
             type: "PUT",
             data: watched
         });
+    },
+    loved: function (id, loved) {
+        return $.ajax({
+            url: "api/examples/" + id,
+            type: "PUT",
+            data: loved
+        })
     }
 };
 
@@ -61,6 +69,7 @@ var API = {
 var refreshLists = function () {
     $("#watched-list").load(location.href + " #watched-list>*","");
     $("#watch-list").load(location.href + " #watch-list>*","");
+    
 }
 
 // Deletes item from database
@@ -87,9 +96,16 @@ var changeWatch = function () {
     });
 };
 
+//add to loved list
+// var changeLoved = function () {
+//     $("#loved").toggleClass("fa fa-heart");
+//     refreshLists();
+// };
+
 // Add event listeners to the update, delete, and details buttons
 $(document).on("click", ".delete", handleDeleteBtnClick);
 $(document).on("click", ".change-watch", changeWatch);
+// $(document).on("click", ".change-loved", changeLoved);
 // $(document).on("click", ".details-button", omdbSearch);
 
 // Find movie
@@ -185,6 +201,7 @@ $("#find-movie").on("click", function (event) {
                                 utelly[i].locations[j].icon + '></a><br>');
                         }
                         $(locationList).append(streamingIcons, locationIcons);
+
                     }
 
                     // Add to search
@@ -215,7 +232,6 @@ $("#find-movie").on("click", function (event) {
         });
     });
 });
-
 // Adds movie to Streamline table
 var handleFormSubmit = function (event) {
     event.preventDefault();
@@ -225,13 +241,18 @@ var handleFormSubmit = function (event) {
     var movieTitle = movieMatch.name;
     var imdbLink = movieMatch.external_ids.imdb.url;
     var searchID = movieMatch.external_ids.imdb.id;
+    var fullURL = window.location.pathname;
+    var halfURL = fullURL.split('/', 2);
+    var userID = halfURL[1];
+    
     var addedMovie = {
         movie: movieTitle,
         image: moviePic,
         imdb: imdbLink,
         imdbID: searchID,
-        watched: false
-        //UserId: "/:id"
+        watched: false,
+        loved: false,
+        UserId: userID
       };
       console.log(addedMovie);
     API.saveExample(addedMovie).then(function () {
