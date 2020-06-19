@@ -5,7 +5,7 @@
 body {
   background: url("../images/film_overlay.png");
   background-color: rgb(26, 26, 26);
-  font-family: Arial;
+  font-family: 'Poppins', sans-serif;
   color: white;
   background-size: cover;
   background-repeat: no-repeat;
@@ -16,9 +16,14 @@ body {
   margin-bottom: 40px;
 }
 
+<<<<<<< HEAD
 #page_container {
   position: relative;
   min-height: 97vh;
+=======
+#loved{
+  color: crimson;
+>>>>>>> bebe2d3686209b2da12c499ac3579507d4e55c93
 }
 
 /* 

@@ -31,7 +31,7 @@ module.exports = function(app) {
       layout: 'main'
     });
   });
-  
+
   app.get("/home", function(req, res) {
     db.Streamline.findAll({}).then(function(dbStreamline) {
       res.render("home", {
@@ -62,10 +62,14 @@ module.exports = function(app) {
             UserId: req.params.id
           }
         }).then(function(data) {
-          console.log(data)
+          console.log(data);
+          var examples = {
+              movies: data,
+          }
+          res.render("index", examples);
 
         })
-        res.render('index')
+      
       })
   });
 

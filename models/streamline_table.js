@@ -22,7 +22,11 @@ module.exports = function (sequelize, DataTypes) {
         },
         watched:{ 
             type: DataTypes.BOOLEAN,
-            default: false,
+            default: false
+        },
+        loved: {
+            type: DataTypes.BOOLEAN,
+            default: false
         }
     });
 

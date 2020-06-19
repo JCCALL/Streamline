@@ -34,7 +34,6 @@ This application was driven by a desire to spend less time trying to find out wh
 - [Express](https://www.npmjs.com/package/express)
 - [Axios](https://www.npmjs.com/package/axios)
 - [bcrypt](https://www.npmjs.com/package/bcrypt)
-- [browserify](https://www.npmjs.com/package/browserify)
 - [dotenv](https://www.npmjs.com/package/dotenv)
 - [Express-Handlebars](https://www.npmjs.com/package/express-handlebars)
 - [mySQL2](https://www.npmjs.com/package/mysql2)
