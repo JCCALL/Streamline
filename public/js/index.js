@@ -145,7 +145,7 @@ $("#find-movie").on("click", function (event) {
                 }).then(function (response) {
                     console.log(response);
                     omdbFullData.push(response.Plot);
-                    console.log(omdbFullData);       
+                    console.log(omdbFullData);
                 });
                 // Takes out movies if they're not in OMDB
                 if (omdbIndex > -1) {
@@ -185,10 +185,6 @@ $("#find-movie").on("click", function (event) {
                                 utelly[i].locations[j].icon + '></a><br>');
                         }
                         $(locationList).append(streamingIcons, locationIcons);
-                        // Labels streaming column in results if they exist
-                        if (streaming === true) {
-                            streamingIcons.prepend('<p id="stream">Stream</p>');
-                        } 
                     }
 
                     // Add to search
@@ -196,8 +192,8 @@ $("#find-movie").on("click", function (event) {
                     $(streamingIcons).append(buttonDiv);
                     $(movieDiv).append(bgOverlay, movieTitle, locationList, buttonDiv);
                     $("#movie-view").append(movieDiv);
-                    
-                    //Clear out previous modal with same ID           
+
+                    //Clear out previous modal with same ID
                     $('#modal-main' + [i]).html("");
                     $('#modal-header' + [i]).html("");
                     $('#modal-content' + [i]).html("");
