@@ -225,6 +225,7 @@ $("#find-movie").on("click", function (event) {
                     $('#modal-content' + [i]).append('<div class="modal-body" id="modal-body' + [i] + '"></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button><button type="button" class="btn btn-primary watch-button" id=' + [i] + '>Add to Watchlist</button></div>');
                     $('#modal-title' + [i]).append(omdbMatch.Title + movieYear);
                     $('#modal-body' + [i]).append(moviePoster);
+                    
                     // $('#modal-body' + [i]).append('<p class="movie-description">' + omdbFullData[0] + '</p>');
                     // <br><p class="rating">' + omdbFullData[0].Rated + '</p>');
                     

@@ -192,7 +192,7 @@
         </div>
         <!--Modal div-->
         <div id="modal-create"></div>
-        
+
         {{!-- Alert Modal --}}
         <div class="modal fade" id="alertModal" role="dialog">
             <div class="modal-dialog">
@@ -200,20 +200,43 @@
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">Added to Watchlist!</h4>
                     </div>
-                    {{!-- <div class="modal-footer">
+                    <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div> --}}
+                    </div>
                 </div>
 
             </div>
         </div>
+        <div class="modal fade" id="namesModal" role="dialog">
+            <div class="modal-dialog">
 
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Verbose-octo-train is:</h4>
+                    </div>
+                    <div>
+                        <br>
+                        <ul>
+                            <li>Jordan Call</li>
+                            <li>Lisa Campbell</li>
+                            <li>Shianne Taylor</li>
+                            <li>Drew Congino</li>
+                            <li>Joshua Duncan</li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="container text-center" id="footer">
-        Copyright 2020 <i class="fa fa-copyright"></i> <a href=>Verbose-Octo-Train</a> |
+        Copyright 2020 <i class="fa fa-copyright"></i>
+        <a href="#namesModal" data-toggle="modal" data-target="#namesModal">Verbose-octo-train</a> |
         <a href="https://github.com/JCCALL/verbose-octo-train" class="fa fa-github"> Github </a>
     </div>
 </div>
