@@ -71,7 +71,7 @@
             </ul>
         </div>
 
-        
+
 
         <div id="Watched" class="tabcontent">
 
@@ -100,7 +100,8 @@
                 {{#each movies}}
                 {{#if this.dataValues.loved}}
                 <li data-id="{{this.dataValues.id}}" class="list-group-item col-sm-6 col-md-4">
-                    <button class="btn btn-secondary float-right delete"><i class="fa fa-remove" aria-hidden="true"></i></button>
+                    <button class="btn btn-secondary float-right delete"><i class="fa fa-remove"
+                            aria-hidden="true"></i></button>
                     <h4>{{this.dataValues.movie}}</h4>
                     <img class="watch-picture img-fluid" src="{{this.dataValues.image}}">
                     <button class="change-watch btn btn-primary" data-id="{{this.dataValues.id}}" data-newwatch="false">
@@ -191,9 +192,28 @@
         </div>
         <!--Modal div-->
         <div id="modal-create"></div>
+        
+        {{!-- Alert Modal --}}
+        <div class="modal fade" id="alertModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Added to Watchlist!</h4>
+                    </div>
+                    {{!-- <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div> --}}
+                </div>
+
+            </div>
+        </div>
+
     </div>
     <div class="container text-center" id="footer">
         Copyright 2020 <i class="fa fa-copyright"></i> <a href=>Verbose-Octo-Train</a> |
-            <a href="https://github.com/JCCALL/verbose-octo-train" class="fa fa-github"> Github </a>
+        <a href="https://github.com/JCCALL/verbose-octo-train" class="fa fa-github"> Github </a>
     </div>
 </div>

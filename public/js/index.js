@@ -176,7 +176,7 @@ $("#find-movie").on("click", function (event) {
                     var moviePicture = '<img class="movie-pic img-fluid" src=' + utelly[i].picture + '>';
                     var imdbLink = '<a target="_blank" href=' + utelly[i].external_ids.imdb.url + '><img class="location-icon img-fluid" src="https://img.icons8.com/all/500/imdb.png"></a>';
                     var buttonDiv = $('<div class="watch-details-buttons">');
-                    var watchButton = '<button id="' + [i] + '" value="' + omdbIndex + '" class="btn btn-primary watch-button">Add to Watchlist</button>';
+                    var watchButton = '<button id="' + [i] + '" value="' + omdbIndex + '" class="btn btn-primary watch-button" data-toggle="modal" data-target="#alertModal">Add to Watchlist</button>';
                     var detailsButton = '<button id="movieDetails' + [i] + '" value="' + imdbID + '" class="btn btn-primary details-button" data-toggle="modal" data-target="#movieModal' + [i] + '">Details</button>';
                     var locationList = $('<div class="location-list row">');
                     var streamingIcons = $('<div class="streaming-list col-6">');
@@ -201,6 +201,7 @@ $("#find-movie").on("click", function (event) {
                                 utelly[i].locations[j].icon + '></a><br>');
                         }
                         $(locationList).append(streamingIcons, locationIcons);
+
                     }
 
                     // Add to search
@@ -226,6 +227,7 @@ $("#find-movie").on("click", function (event) {
                     $('#modal-body' + [i]).append(moviePoster);
                     // $('#modal-body' + [i]).append('<p class="movie-description">' + omdbFullData[0] + '</p>');
                     // <br><p class="rating">' + omdbFullData[0].Rated + '</p>');
+                    
                 }
             }
         });
@@ -254,11 +256,14 @@ var handleFormSubmit = function (event) {
         UserId: userID
       };
       console.log(addedMovie);
+      
     API.saveExample(addedMovie).then(function () {
         refreshLists();
-        alert("added");
+        console.log("added");
+        
     });
 };
+
 
 // Add to watchlist
 $(document).on('click', '.watch-button', handleFormSubmit);
