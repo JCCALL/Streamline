@@ -16,6 +16,11 @@ body {
   margin-bottom: 40px;
 }
 
+#page_container {
+  position: relative;
+  min-height: 97vh;
+}
+
 /* 
 Not necessary if using film_overlay.png
 .overlay {
@@ -280,6 +285,10 @@ Not necessary if using film_overlay.png
 /* Footer */
 #footer {
   font-family: 'Times New Roman', Times, serif;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
 }
 
 #stream {
