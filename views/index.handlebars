@@ -59,17 +59,16 @@
                     <button class="change-watch btn btn-primary" data-id="{{this.dataValues.id}}" data-newwatch="true">
                         <i class="fa fa-check-square-o pr-2" aria-hidden="true"></i>Watched
                     </button>
-
+                    <button class="change-loved btn" data-id="{{this.dataValues.id}}" data-newlove="true">
+                        <i class="fa fa-heart-o" id="loved" aria-hidden="true"></i>
+                    </button>
                 </li>
                 {{/unless}}
                 {{/each}}
             </ul>
         </div>
 
-        {{!-- <div id="Favorites" class="tabcontent">
-            <h3>My Favorites!</h3>
-            <p>List of Favorited Movies/Shows</p>
-        </div> --}}
+        
 
         <div id="Watched" class="tabcontent">
 
@@ -83,13 +82,34 @@
                     <button class="change-watch btn btn-primary" data-id="{{this.dataValues.id}}" data-newwatch="false">
                         <i class="fa fa-film pr-2" aria-hidden="true"></i>Watch Again
                     </button>
+                    <button class="change-loved btn" data-id="{{this.dataValues.id}}" data-newlove="true">
+                        <i class="fa fa-heart-o" id="loved" aria-hidden="true"></i>
+                    </button>
                 </li>
                 {{/if}}
                 {{/each}}
             </ul>
 
         </div>
-
+        <div id="Favorites" class="tabcontent">
+            <ul class="loved row" id="loved-list">
+                {{#each movies}}
+                {{#if this.dataValues.loved}}
+                <li data-id="{{this.dataValues.id}}" class="list-group-item col-sm-6 col-md-4">
+                    <button class="btn btn-secondary float-right delete"><i class="fa fa-remove" aria-hidden="true"></i></button>
+                    <h4>{{this.dataValues.movie}}</h4>
+                    <img class="watch-picture img-fluid" src="{{this.dataValues.image}}">
+                    <button class="change-watch btn btn-primary" data-id="{{this.dataValues.id}}" data-newwatch="false">
+                        <i class="fa fa-film pr-2" aria-hidden="true"></i>Watch Again
+                    </button>
+                    <button class="change-loved btn" data-id="{{this.dataValues.id}}" data-newlove="true">
+                        <i class="fa fa-heart-o" id="loved" aria-hidden="true"></i>
+                    </button>
+                </li>
+                {{/if}}
+                {{/each}}
+            </ul>
+        </div>
         <div id="Default" class="tabcontent show-content">
             <div class="row">
                 <div class="col-md-6">
@@ -168,4 +188,9 @@
         <!--Modal div-->
         <div id="modal-create"></div>
     </div>
+</div>
+<div class="container text-center" id="footer">
+    <p>Copyright 2020 <i class="fa fa-copyright"></i> <a href="https://github.com/JCCALL/verbose-octo-train" class="fa fa-github"> Verbose-Octo-Train </a></p>
+    <p id="foottext">Verbose-Octo-Train is: Lisa Campbell, Jordan Call, Shianne Taylor, Drew Congino, Joshua Duncan</p>
+    <br>
 </div>
