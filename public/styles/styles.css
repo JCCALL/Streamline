@@ -15,8 +15,10 @@ body {
 .main-container {
   margin-bottom: 40px;
 }
-
-
+#page_container {
+  position: relative;
+  min-height: 97vh;
+}
 
 /* The Tabs CSS */
 
@@ -290,14 +292,11 @@ body {
 
 /* Footer */
 #footer {
-  font-family: 'Times New Roman', Times, serif;
   position: absolute;
   top: 100%;
   left: 0;
   right: 0;
 }
-
-
 
 .title {
     text-transform: uppercase;
