@@ -82,17 +82,17 @@ module.exports = function (app) {
     });
 
     // put to move watchlist to watched
-    app.put("/api/watched", function (req, res) {
-        db.Streamline.update({
-            watched: true,
-        }, {
-            where: {
-                id: req.body.id
-            }
-        }).then(function (data) {
-            res.json(data)
-        });
-    });
+    // app.put("/api/watched", function (req, res) {
+    //     db.Streamline.update({
+    //         watched: true,
+    //     }, {
+    //         where: {
+    //             id: req.body.id
+    //         }
+    //     }).then(function (data) {
+    //         res.json(data)
+    //     });
+    // });
 
 
     // post to save search data
@@ -104,10 +104,7 @@ module.exports = function (app) {
     });
 
     // UTelly config (needs to be inside another app.get with route of api/utelly)
-
     app.get("/api/utelly", function (req, res) {
-
-        //   var movie = 
         axios({
             method: "get",
             url: "https://utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com/lookup?term=" + movie + "&country=us",
@@ -119,16 +116,22 @@ module.exports = function (app) {
             crossDomain: true,
         }).then(function (response) {
             res.json(response.data);
-
-            //   app.post("/api/newmovie", function(req, res) {
-            //     db.users.create({
-            //       username: req.body.username,
-            //       email: req.body.email,
-            //       password: req.body.password
-            //     }).then(function(data){
-            //     res.redirect('/')
-            //   });
-            //   });
         });
     });
+
+// UTelly search by IMDB Id
+app.get("/api/utellyID", function (req, res) {
+    axios({
+        method: "get",
+        url: "https://utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com/idlookup?country=US&source_id=" + movie + "&source=imdb",
+        headers: {
+            "x-rapidapi-host": "utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com",
+            "x-rapidapi-key": api_key
+        },
+        async: true,
+        crossDomain: true,
+    }).then(function (response) {
+        res.json(response.data);
+    });
+});
 }

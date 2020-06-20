@@ -166,6 +166,7 @@ body {
 
 .watch-picture {
     padding-bottom: 3px;
+    border-radius: 4px;
 }
 
 /* Modal CSS */
@@ -177,11 +178,27 @@ body {
     text-align: center;
     width:100%;
 }
-.modal-body {
-    
+.modal-body { 
+    padding: 15px;
+    /* justify-content: space-evenly; */
+}
+.modal-icon-div {
+    padding-left: 10px;
 }
 .movie-poster {
     width: 50%;
+}
+.year {
+    font-size: 17px;   
+}
+.modal-icons {
+    /* width: 200px;
+    background-color: rgb(226, 235, 236);
+    box-shadow: 1px 2px 4px rgb(0, 0, 0); */
+    padding: 1px 5px 1px 5px;
+    border-radius: 4px;
+    margin: 5px 0px 5px 0px;
+    height: 40px;
 }
 
 /* Movie search results  */
