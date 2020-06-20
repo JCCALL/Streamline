@@ -44,6 +44,18 @@ module.exports = function (app) {
             })
     });
 
+    // Mark as favorite
+    app.put("/api/loved/:id", function (req, res) {
+        db.Streamline.update({
+            loved: req.body.loved
+        }, {
+            where: { id: req.params.id },
+        })
+            .then(function (dbStreamline) {
+                res.json(dbStreamline);
+            })
+    });
+
     //post for new user
     app.post("/api/newuser", function (req, res) {
         db.Users.create({
@@ -55,6 +67,7 @@ module.exports = function (app) {
         });
     });
 
+    // login
     app.post('/api/login', (req, res) => {
         var password = req.body.password;
         db.Users.findOne({
@@ -80,20 +93,6 @@ module.exports = function (app) {
                 })
             })
     });
-
-    // put to move watchlist to watched
-    // app.put("/api/watched", function (req, res) {
-    //     db.Streamline.update({
-    //         watched: true,
-    //     }, {
-    //         where: {
-    //             id: req.body.id
-    //         }
-    //     }).then(function (data) {
-    //         res.json(data)
-    //     });
-    // });
-
 
     // post to save search data
     app.post("/api/search", function (req, res) {
