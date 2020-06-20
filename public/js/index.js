@@ -3,7 +3,7 @@ var utellyResults = [];
 var omdbResults = [];
 var omdbIdArray = [];
 var utellyIdArray = [];
-var omdbFullData = [];
+var omdbPoster = [];
 
 var $watchList = $(".watchlist");
 var $watchedList = $("#watched-list");
@@ -49,6 +49,12 @@ var API = {
             type: "GET"
         })
     },
+    getMovieByID: function (id) {
+        return $.ajax({
+            url: "api/utellyID",
+            type: "GET"
+        })
+    },
     updateMovie: function (id, watched) {
         return $.ajax({
             url: "api/examples/" + id,
@@ -67,9 +73,8 @@ var API = {
 
 // Refreshes Watchlists
 var refreshLists = function () {
-    $("#watched-list").load(location.href + " #watched-list>*","");
-    $("#watch-list").load(location.href + " #watch-list>*","");
-    
+    $("#watched-list").load(location.href + " #watched-list>*", "");
+    $("#watch-list").load(location.href + " #watch-list>*", "");
 }
 
 // Deletes item from database
@@ -87,12 +92,106 @@ var changeWatch = function () {
     var movieID = $(this)
         .parent()
         .attr("data-id");
-        var newWatch = $(this).data("newwatch");
-        var newWatched = {
-          watched: newWatch
-        };
+    var newWatch = $(this).data("newwatch");
+    var newWatched = {
+        watched: newWatch
+    };
     API.updateMovie(movieID, newWatched).then(function () {
         refreshLists();
+    });
+};
+
+// Adds movie to Streamline table/watchlist
+var handleFormSubmit = function (event) {
+    event.preventDefault();
+    var movieIndex = this.id;
+    var movieMatch = utellyResults[0].results[movieIndex];
+    var moviePic = omdbPoster[movieIndex];
+    var movieTitle = movieMatch.name;
+    var imdbLink = movieMatch.external_ids.imdb.url;
+    var searchID = movieMatch.external_ids.imdb.id;
+    // grab id in url
+    var fullURL = window.location.pathname;
+    var halfURL = fullURL.split('/', 2);
+    var userID = halfURL[1];
+
+    var addedMovie = {
+        movie: movieTitle,
+        image: moviePic,
+        imdb: imdbLink,
+        imdbID: searchID,
+        watched: false,
+        loved: false,
+        UserId: userID
+    };
+    console.log(addedMovie);
+    API.saveExample(addedMovie).then(function () {
+        refreshLists();
+        console.log("added");
+    });
+};
+
+// Details button omdb call
+var detailsModal = function () {
+    // clear out modal
+    var imdbID = $(this).attr('value');
+    console.log(imdbID);
+        // Runs a new omdb search by id to get plot & ratings data
+        var newURL = "https://www.omdbapi.com/?i=" + imdbID + "&plot=long&tomatoes&apikey=trilogy";
+        $.ajax({
+            url: newURL,
+            method: "GET"
+        }).then(function (response) {
+            console.log(response);
+            for (var i = 0; i < utellyIdArray.length; i++) {
+                $('#modal-title' + [i]).html(response.Title + '<div class="year">' + response.Year + '</div');
+                $('#modal-body' + [i]).html('<div class="col-12"><img class="img-fluid w-100" src="' + response.Poster + '"></div><div class="p-3">' + response.Plot + '</div>');
+            }
+        });     
+};
+
+// Where to watch button click utelly search
+var whereToWatch = function () {
+    // clear out modal
+    $('.modal-title').html("");
+    $('.modal-body').html("");
+    $('.modal-icon-div').html("");
+    var imdbID = $(this).attr("data-id");
+    var search = {
+        search: imdbID
+    };
+    API.saveSearch(search).then(function () {
+        API.getMovieByID(imdbID).then(function (response) {
+            var locations = response.collection.locations;
+            $('.modal-title').text(response.collection.name);
+            $('.modal-body').html('<img class="img-fluid mb-3 rounded" src="' + response.collection.picture + '">');  
+            var modalIcons = $('<div class="modal-icon-div row">');
+            for (var i = 0; i < locations.length; i++) {   
+                var location = locations[i].display_name;
+                // Divides streaming subscriptions from rent/buy
+                if (location === 'Netflix' || location === 'Amazon Prime Video' || location === 'Disney+' || location === 'HBO') {
+                    $(modalIcons).append('<a target="_blank" class="modal-streaming" href=' +
+                        locations[i].url + '><img class="modal-icons img-fluid" src=' +
+                        locations[i].icon + '></a><br>');
+                    // Gives Hulu a custom icon
+                } else if (location === 'Hulu') {
+                    $(modalIcons).append('<a target="_blank" class="modal-streaming" href=' +
+                        locations[i].url + '><img class="modal-icons img-fluid" src="/images/hulu.png"></a><br>');
+                    // Gives Vudu a custom icon
+                } else if (location === 'VuduIVAUS') {
+                    $(modalIcons).append('<a target="_blank" class="modal-streaming" href=' +
+                        locations[i].url + '><img class="modal-icons img-fluid" src="/images/vudu.png"></a><br>');
+                    // Excludes items without icons from search
+                } else if (location === 'AtomTicketsIVAUS' || location === 'NOT_SETIVAUS' || location === 'HBOMaxIVAUS') {
+                    // Returns rent/buy options
+                } else {
+                    $(modalIcons).append('<a target="_blank" class="modal-rent-buy" href=' +
+                        locations[i].url + '><img class="modal-icons img-fluid" src=' +
+                        locations[i].icon + '></a><br>');
+                }  
+            }
+            $('.modal-body').append(modalIcons);
+        });
     });
 };
 
@@ -105,19 +204,22 @@ var changeWatch = function () {
 // Add event listeners to the update, delete, and details buttons
 $(document).on("click", ".delete", handleDeleteBtnClick);
 $(document).on("click", ".change-watch", changeWatch);
+$(document).on("click", "#where-to-watch", whereToWatch);
+$(document).on('click', '.watch-button', handleFormSubmit);
 // $(document).on("click", ".change-loved", changeLoved);
-// $(document).on("click", ".details-button", omdbSearch);
+$(document).on("click", ".details-button", detailsModal);
 
 // Find movie
 $("#find-movie").on("click", function (event) {
     event.preventDefault();
+    $('#find-movie').val("");
     $(".tabcontent").hide();
     $("#movie-view").empty();
     omdbResults = [];
     utellyResults = [];
     omdbIdArray = [];
     utellyIdArray = [];
-    omdbFullData = [];
+    omdbPoster = [];
 
     // Here we grab the text from the input box
     var movie = $("#movie-input").val();
@@ -153,27 +255,27 @@ $("#find-movie").on("click", function (event) {
                 utellyIdArray.push(imdbID);
                 var omdbIndex = omdbIdArray.indexOf(imdbID);
                 var omdbMatch = omdbResults[0].Search[omdbIndex];
+                var poster = omdbMatch.Poster;
+                omdbPoster.push(poster);
                 // Runs a new omdb search by id to get plot & ratings data
-                var newURL = "https://www.omdbapi.com/?i=" + imdbID + "&plot=long&tomatoes&apikey=trilogy";
-                $.ajax({
-                    url: newURL,
-                    method: "GET"
-                }).then(function (response) {
-                    console.log(response);
-                    omdbFullData.push(response.Plot);
-                    console.log(omdbFullData);
-                });
+                // var newURL = "https://www.omdbapi.com/?i=" + imdbID + "&plot=long&tomatoes&apikey=trilogy";
+                // $.ajax({
+                //     url: newURL,
+                //     method: "GET"
+                // }).then(function (response) {
+                //     console.log(response);
+                //     omdbPoster.push(response.Poster);
+                //     console.log(omdbPoster);
+                // });
                 // Takes out movies if they're not in OMDB
                 if (omdbIndex > -1) {
+                    // creates html elements
                     var movieDiv = $('<div class="movie-list">');
                     var bgOverlay = $('<div class="bg-overlay">');
                     $(movieDiv).attr('id', imdbID);
                     $(movieDiv).attr('value', [i]);
                     $(movieDiv).css('background-image', 'url(' + utelly[i].picture + ')');
                     var movieTitle = '<div class="movie-header"><div class="movie-title">' + omdbMatch.Title + '</div><div class="movie-year">' + omdbMatch.Year + '</div></div>';
-                    var moviePoster = '<img class="movie-poster img-fluid" src=' + omdbMatch.Poster + '>';
-                    var movieYear = '<p class="year">' + omdbMatch.Year + '</p>';
-                    var moviePicture = '<img class="movie-pic img-fluid" src=' + utelly[i].picture + '>';
                     var imdbLink = '<a target="_blank" href=' + utelly[i].external_ids.imdb.url + '><img class="location-icon img-fluid" src="https://img.icons8.com/all/500/imdb.png"></a>';
                     var buttonDiv = $('<div class="watch-details-buttons">');
                     var watchButton = '<button id="' + [i] + '" value="' + omdbIndex + '" class="btn btn-primary watch-button">Add to Watchlist</button>';
@@ -181,6 +283,7 @@ $("#find-movie").on("click", function (event) {
                     var locationList = $('<div class="location-list row">');
                     var streamingIcons = $('<div class="streaming-list col-6"><div class="stream-heading" id="stream">Stream</div><div>');
                     var locationIcons = $('<div class="rent-or-buy-list col-6"><div class="rent-heading" id="stream">Rent | Buy</div><div>');
+                    // Goes through streaming providers
                     for (var j = 0; j < utelly[i].locations.length; j++) {
                         var provider = utelly[i].locations[j].display_name;
                         // Divides streaming subscriptions from rent/buy
@@ -188,11 +291,11 @@ $("#find-movie").on("click", function (event) {
                             $(streamingIcons).append('<a target="_blank" class="streaming-link" href=' +
                                 utelly[i].locations[j].url + '><img class="location-icon img-fluid" src=' +
                                 utelly[i].locations[j].icon + '></a><br>');
-                          // Gives Hulu a custom icon
+                            // Gives Hulu a custom icon
                         } else if (provider === 'Hulu') {
                             $(streamingIcons).append('<a target="_blank" class="streaming-link" href=' +
                                 utelly[i].locations[j].url + '><img class="location-icon img-fluid" src="/images/hulu.png"></a><br>');
-                        // Excludes items without icons from search
+                            // Excludes items without icons from search
                         } else if (provider === 'AtomTicketsIVAUS' || provider === 'NOT_SETIVAUS') {
                             // Returns rent/buy options
                         } else {
@@ -221,49 +324,12 @@ $("#find-movie").on("click", function (event) {
                     $('#modal-create').append('<div class="modal fade" id="movieModal' + [i] + '" tabindex="-1" role="dialog" aria-labelledby="movieModalLabel" aria-hidden="true"><div id="modal-main' + [i] + '" class="modal-dialog modal-dialog-centered" role="document"></div></div>');
                     $('#modal-main' + [i]).append('<div class="modal-content" id="modal-content' + [i] + '"><div class="modal-header" id="modal-header' + [i] + '"></div></div>');
                     $('#modal-header' + [i]).append('<h4 class="modal-title" id="modal-title' + [i] + '"></h4><br><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>');
-
                     $('#modal-content' + [i]).append('<div class="modal-body" id="modal-body' + [i] + '"></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button><button type="button" class="btn btn-primary watch-button" id=' + [i] + '>Add to Watchlist</button></div>');
-                    $('#modal-title' + [i]).append(omdbMatch.Title + movieYear);
-                    $('#modal-body' + [i]).append(moviePoster);
-                    // $('#modal-body' + [i]).append('<p class="movie-description">' + omdbFullData[0] + '</p>');
-                    // <br><p class="rating">' + omdbFullData[0].Rated + '</p>');
                 }
             }
         });
     });
 });
-// Adds movie to Streamline table
-var handleFormSubmit = function (event) {
-    event.preventDefault();
-    var movieIndex = this.id;
-    var movieMatch = utellyResults[0].results[movieIndex];
-    var moviePic = movieMatch.picture;
-    var movieTitle = movieMatch.name;
-    var imdbLink = movieMatch.external_ids.imdb.url;
-    var searchID = movieMatch.external_ids.imdb.id;
-    // grab id in url
-    var fullURL = window.location.pathname;
-    var halfURL = fullURL.split('/', 2);
-    var userID = halfURL[1];
-
-    var addedMovie = {
-        movie: movieTitle,
-        image: moviePic,
-        imdb: imdbLink,
-        imdbID: searchID,
-        watched: false,
-        loved: false,
-        UserId: userID
-      };
-      console.log(addedMovie);
-    API.saveExample(addedMovie).then(function () {
-        refreshLists();
-        console.log("added");
-    });
-};
-
-// Add to watchlist
-$(document).on('click', '.watch-button', handleFormSubmit);
 
 // Tabs function
 function openTabs(evt, showName) {
