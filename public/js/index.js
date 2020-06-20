@@ -267,7 +267,7 @@ $("#find-movie").on("click", function (event) {
                     var movieTitle = '<div class="movie-header"><div class="movie-title">' + omdbMatch.Title + '</div><div class="movie-year">' + omdbMatch.Year + '</div></div>';
                     var imdbLink = '<a target="_blank" href=' + utelly[i].external_ids.imdb.url + '><img class="location-icon img-fluid" src="https://img.icons8.com/all/500/imdb.png"></a>';
                     var buttonDiv = $('<div class="watch-details-buttons">');
-                    var watchButton = '<button id="' + [i] + '" value="' + omdbIndex + '" class="btn btn-primary watch-button">Add to Watchlist</button>';
+                    var watchButton = '<button id="' + [i] + '" value="' + omdbIndex + '" class="btn btn-primary watch-button" data-toggle="modal" data-target="#alertModal">Add to Watchlist</button>';
                     var detailsButton = '<button id="movieDetails' + [i] + '" value="' + imdbID + '" class="btn btn-primary details-button" data-toggle="modal" data-target="#movieModal' + [i] + '">Details</button>';
                     var locationList = $('<div class="location-list row">');
                     var streamingIcons = $('<div class="streaming-list col-6"><div class="stream-heading" id="stream">Stream</div><div>');
@@ -343,3 +343,4 @@ function showPassword() {
         x.type = "password";
     }
 }
+

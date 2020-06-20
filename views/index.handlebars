@@ -1,4 +1,4 @@
-<div class="container-fluid p-0">
+<div class="container-fluid p-0" id="page_container">
     <div class="line-animate"></div>
     <div class="container main-container">
         <div id="headTitle" class="py-5 heading">
@@ -11,7 +11,8 @@
         <!-- This form will be where users input data about the movies -->
         <div class="search-bar-wrap">
             <form class="search-bar" action="POST">
-                <input class="search" type="text" id="movie-input" placeholder="Search for a movie or show" name="search">
+                <input class="search" type="text" id="movie-input" placeholder="Search for a movie or show"
+                    name="search">
                 <!-- This button will trigger our AJAX call -->
                 <button class="searchButton" id="find-movie" type="submit" value="Search"><i class="fa fa-search"></i>
                 </button>
@@ -37,7 +38,8 @@
 
             <button class="tablinks" onclick="openTabs(event, 'Watchlist')"><i class="fa fa-film pr-2"
                     aria-hidden="true"></i>Watchlist</button>
-            <button class="tablinks" onclick="openTabs(event, 'Watched')"><i class="fa fa-check-square-o pr-2" aria-hidden="true"></i>Watched</button>
+            <button class="tablinks" onclick="openTabs(event, 'Watched')"><i class="fa fa-check-square-o pr-2"
+                    aria-hidden="true"></i>Watched</button>
             <button class="tablinks" onclick="openTabs(event, 'Favorites')"><i class="fa fa-heart-o pr-2"
                     aria-hidden="true"></i>Loved</button>
 
@@ -66,7 +68,7 @@
             </ul>
         </div>
 
-        
+
 
         <div id="Watched" class="tabcontent">
 
@@ -93,7 +95,8 @@
                 {{#each movies}}
                 {{#if this.dataValues.loved}}
                 <li data-id="{{this.dataValues.id}}" class="list-group-item col-sm-6 col-md-4">
-                    <button class="btn btn-secondary float-right delete"><i class="fa fa-remove" aria-hidden="true"></i></button>
+                    <button class="btn btn-secondary float-right delete"><i class="fa fa-remove"
+                            aria-hidden="true"></i></button>
                     <h4>{{this.dataValues.movie}}</h4>
                     <img class="watch-picture img-fluid" src="{{this.dataValues.image}}">
                     <button class="change-watch btn btn-primary" data-id="{{this.dataValues.id}}" data-newwatch="false">
@@ -185,10 +188,51 @@
         </div>
         <!--Modal div-->
         <div id="modal-create"></div>
+
+        {{!-- Alert Modal --}}
+        <div class="modal fade" id="alertModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Added to Watchlist!</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="modal fade" id="namesModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Verbose-octo-train is:</h4>
+                    </div>
+                    <div>
+                        <br>
+                        <ul>
+                            <li>Jordan Call</li>
+                            <li>Lisa Campbell</li>
+                            <li>Shianne Taylor</li>
+                            <li>Drew Congino</li>
+                            <li>Joshua Duncan</li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-<div class="container text-center" id="footer">
-    <p>Copyright 2020 <i class="fa fa-copyright"></i> <a href="https://github.com/JCCALL/verbose-octo-train" class="fa fa-github"> Verbose-Octo-Train </a></p>
-    <p id="foottext">Verbose-Octo-Train is: Lisa Campbell, Jordan Call, Shianne Taylor, Drew Congino, Joshua Duncan</p>
-    <br>
+    <div class="container text-center" id="footer">
+        Copyright 2020 <i class="fa fa-copyright"></i>
+        <a href="#namesModal" data-toggle="modal" data-target="#namesModal">Verbose-octo-train</a> |
+        <a href="https://github.com/JCCALL/verbose-octo-train" class="fa fa-github"> Github </a>
+    </div>
 </div>
