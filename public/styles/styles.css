@@ -16,25 +16,6 @@ body {
   margin-bottom: 40px;
 }
 
-#page_container {
-  position: relative;
-  min-height: 97vh;
-}
-
-#loved{
-  color: crimson;
-}
-
-/* 
-Not necessary if using film_overlay.png
-.overlay {
-  background-color: rgb(0, 0, 0, 0.5);
-  width: 100%; 
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-} */
 
 
 /* The Tabs CSS */
@@ -58,6 +39,10 @@ Not necessary if using film_overlay.png
   transition: 0.3s;
   font-size: 17px;
 }
+
+#loved {
+    color: crimson;
+  }
 
 /* Search bar */
 
@@ -181,6 +166,7 @@ Not necessary if using film_overlay.png
 
 .watch-picture {
     padding-bottom: 3px;
+    border-radius: 4px;
 }
 
 /* Modal CSS */
@@ -192,11 +178,27 @@ Not necessary if using film_overlay.png
     text-align: center;
     width:100%;
 }
-.modal-body {
-    
+.modal-body { 
+    padding: 15px;
+    /* justify-content: space-evenly; */
+}
+.modal-icon-div {
+    padding-left: 10px;
 }
 .movie-poster {
     width: 50%;
+}
+.year {
+    font-size: 17px;   
+}
+.modal-icons {
+    /* width: 200px;
+    background-color: rgb(226, 235, 236);
+    box-shadow: 1px 2px 4px rgb(0, 0, 0); */
+    padding: 1px 5px 1px 5px;
+    border-radius: 4px;
+    margin: 5px 0px 5px 0px;
+    height: 40px;
 }
 
 /* Movie search results  */
@@ -231,7 +233,7 @@ Not necessary if using film_overlay.png
     color: white;
     font-weight: bold;
     text-shadow: 1px 2px 4px rgb(0, 0, 0);
-    padding-bottom: 30px;
+    padding-bottom: 40px;
 }
 
 .movie-view {
@@ -250,11 +252,11 @@ Not necessary if using film_overlay.png
 }
 
 .stream-heading {
-    padding-left: 18px;
+    padding-left: 20px;
 }
 
 .rent-heading {
-    padding-right: 5px;
+    padding-right: 10px;
 }
 .streaming-list {
     padding-top: 10px;
@@ -295,10 +297,7 @@ Not necessary if using film_overlay.png
   right: 0;
 }
 
-#stream {
-  color: white;
-  text-shadow: 2px 2px black;
-}
+
 
 .title {
     text-transform: uppercase;
@@ -371,6 +370,9 @@ Not necessary if using film_overlay.png
     .movie-list {
         width: 100%;
     }
+    .tab button {
+    padding: 10px 10px;
+    }
   }
 
   @media screen and (min-width: 992px) {
@@ -394,4 +396,9 @@ Not necessary if using film_overlay.png
       width: 75%;
       margin-bottom: 30px;
     }
+    .watch-button, .details-button {
+      font-size: 14px;
+    }
   }
+
+
