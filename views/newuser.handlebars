@@ -7,30 +7,27 @@
 
 <div class="login container text-center col-12 col-md-8 col-lg-6 px-3">
      <div class="title">StreamLine</div>
-    <div class="subtitle">Sit on your ass. Find your shows fast.</div>
-    <div class="subtitle">New User</div>
-    <p>Fill out the form below to start finding the Stream of your Dreams</p>
-    <hr>
-    <form class="form mx-auto" method="POST" action="/api/newuser">
-        <br>        
-        <input type="text" id="newUsername" placeholder="Username" name="username" required>
+    {{!-- <div class="subtitle">Sit on your ass. Find your shows fast.</div> --}}
+    <p class="subtitle">Start finding the stream of your dreams.</p>
+    
+    <form class="form mx-auto" method="POST" action="/api/newuser">      
+        <input class="form-field" type="text" id="newUsername" placeholder="Username" name="username" required>
         <br>
-        <input type="email" placeholder="Email" name="email" required>
+        <input class="form-field" type="email" placeholder="Email" name="email" required>
         <br>
-        <input id="myInput" type="password" placeholder="Enter Password" name="password" id="myInput" required>
+        <input class="form-field" id="myInput" type="password" placeholder="Password" name="password" id="myInput" required>
         <br>
-        <label>
+        <label class="show-password">
             <input type="checkbox" onclick="showPassword()"> Show Password</label>
         <br>
-        <label>
+        {{!-- <label>
             <p>By creating an account you agree to our <a href="#" style="color:rgb(104, 140, 161)">Terms & Privacy</a>.</p>
-        </label>
+        </label> --}}
         <br>
         <button type="submit" class="btn btn-primary">Register Now</button>
     </form>
-    <div>Already Registered? <a href="/login" class="text-white">Click Here!</a></div>
-
-    
+    <div>Already have an account? <a href="/login">Log In</a></div>
+  
 </div>
 </div>
 <script src="particles/particles.js"></script>

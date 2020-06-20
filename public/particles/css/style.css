@@ -11,15 +11,29 @@
     color: white;
 }
 
-.input {
+@media screen and (max-width: 550px) {
+    .title {
+        font-size: 40px;
+    }
+    .subtitle {
+        /* font-size: 15px; */
+    }
+}
+
+.form-field {
     padding: 5px;
     margin: 5px;
     width: 60%;
 }
 
+.show-password {
+    padding-top: 10px;
+}
+
+
 .subtitle {
     color: white;
-    font-size: 25px;
+    font-size: 20px;
     padding-bottom: 30px;
 }
 
@@ -83,7 +97,7 @@ canvas{
   }
 
   .form {
-    letter-spacing: 0.2em;
+    letter-spacing: 0.1em;
   }
 
 /* ---- particles.js container ---- */
@@ -96,3 +110,4 @@ canvas{
   background-position: 50% 50%;
   background-repeat: no-repeat;
 }
+

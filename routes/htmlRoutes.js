@@ -2,20 +2,20 @@ var db = require("../models");
 
 module.exports = function(app) {
   // Load index page
-  app.get("/", function(req, res) {
-    db.Streamline.findAll({}).then(function(dbStreamline) {
-        var examples = {
-            movies: dbStreamline
-        }
-      res.render("index", examples);
-    });
-  });
+//   app.get("/", function(req, res) {
+//     db.Streamline.findAll({}).then(function(dbStreamline) {
+//         var examples = {
+//             movies: dbStreamline
+//         }
+//       res.render("index", examples);
+//     });
+//   });
   // app.get("/", function(req, res) {
   //   res.render("index", {
   //     layout: 'main'
   //   });
   // });
-  app.get("/login", function(req, res) {
+  app.get("/", function(req, res) {
     res.render("login", {
       layout: 'main'
     });
