@@ -237,7 +237,6 @@ $("#find-movie").on("click", function (event) {
         for (i = 0; i < omdb.length; i++) {
             omdbIdArray.push(omdb[i].imdbID);
         }
-        // console.log(omdbResults);
     });
 
     var search = {
@@ -257,16 +256,6 @@ $("#find-movie").on("click", function (event) {
                 var omdbMatch = omdbResults[0].Search[omdbIndex];
                 var poster = omdbMatch.Poster;
                 omdbPoster.push(poster);
-                // Runs a new omdb search by id to get plot & ratings data
-                // var newURL = "https://www.omdbapi.com/?i=" + imdbID + "&plot=long&tomatoes&apikey=trilogy";
-                // $.ajax({
-                //     url: newURL,
-                //     method: "GET"
-                // }).then(function (response) {
-                //     console.log(response);
-                //     omdbPoster.push(response.Poster);
-                //     console.log(omdbPoster);
-                // });
                 // Takes out movies if they're not in OMDB
                 if (omdbIndex > -1) {
                     // creates html elements
@@ -304,7 +293,6 @@ $("#find-movie").on("click", function (event) {
                                 utelly[i].locations[j].icon + '></a><br>');
                         }
                         $(locationList).append(streamingIcons, locationIcons);
-
                     }
 
                     // Add to search
