@@ -51,7 +51,7 @@ module.exports = function (app) {
             email: req.body.email.trim(),
             password: req.body.password.trim()
         }).then(function (data) {
-            res.redirect('/' + data.id);
+            res.redirect('/stream/' + data.id);
         });
     });
 
@@ -73,7 +73,7 @@ module.exports = function (app) {
                     if (err) throw err
                     //if both match
                     if (data) {
-                        return res.redirect('/' + user.id);
+                        return res.redirect('/stream/' + user.id);
                     } else {
                         return res.status(401).json({ msg: "Incorrect Password" })
                     }

@@ -1,194 +1,28 @@
-<div class="container-fluid p-0">
-    <div class="line-animate"></div>
-    <div class="container main-container">
-        <div id="headTitle" class="py-5 heading">
-            <h1 class="title">StreamLine</h1>
-            <!--<h4>Sit on your ass less! Find your shows faster!</h4>-->
-            <h4>Sit on your ass. Find your shows fast.</h4>
-            <!--<h4>Browse Less. Watch More.</h4>-->
-        </div>
+<head>
+    <link rel="stylesheet" media="screen" href="particles/css/style.css">
+</head>
 
-        <!-- This form will be where users input data about the movies -->
-        <div class="search-bar-wrap">
-            <form class="search-bar" action="POST">
-                <input class="search" type="text" id="movie-input" placeholder="Search for a movie or show" name="search">
-                <!-- This button will trigger our AJAX call -->
-                <button class="searchButton" id="find-movie" type="submit" value="Search"><i class="fa fa-search"></i>
-                </button>
-            </form>
-        </div>
+<!-- particles.js container -->
+<div id="particles-js">
 
-        <div id="headLogin">
-
-            <!-- Button trigger login -->
-            <a href="/login"><button class="btn btn-primary mr-2 login">
-                    Login
-                </button></a>
-
-            <!-- Button trigger register -->
-            <a href="/newuser"><button class="btn btn-primary mr-2 login">
-                    Register</button></a>
-        </div>
-
-        <!-- Tab section -->
-        <div class="tab mt-5">
-            <button class="tablinks" onclick="openTabs(event, 'Default')"><i class="fa fa-home"
-                    aria-hidden="true"></i></button>
-
-            <button class="tablinks" onclick="openTabs(event, 'Watchlist')"><i class="fa fa-film pr-2"
-                    aria-hidden="true"></i>Watchlist</button>
-            <button class="tablinks" onclick="openTabs(event, 'Watched')"><i class="fa fa-check-square-o pr-2" aria-hidden="true"></i>Watched</button>
-            <button class="tablinks" onclick="openTabs(event, 'Favorites')"><i class="fa fa-heart-o pr-2"
-                    aria-hidden="true"></i>Loved</button>
-
-        </div>
-
-        <div id="Watchlist" class="tabcontent">
-            <ul class="watchlist row" id="watch-list">
-                {{#each movies}}
-                {{#unless this.dataValues.watched}}
-                <li data-id="{{this.dataValues.id}}" class="list-group-item col-6 col-md-4">
-                    <button class="btn btn-secondary float-right delete"><i class="fa fa-remove" aria-hidden="true"></i></button>
-                    <h4>{{this.dataValues.movie}}<button class="change-loved btn" data-id="{{this.dataValues.id}}" data-newlove="true">
-                        <i class="fa fa-heart-o" id="loved" aria-hidden="true"></i>
-                    </button></h4>
-                    <img class="watch-picture img-fluid" src="{{this.dataValues.image}}"> 
-                    <button id="where-to-watch" type="button" class="btn btn-primary" data-toggle="modal" data-target="#movieModal" data-id="{{this.dataValues.imdbID}}"
-                        data-neweat="true">
-                        <i class="fa fa-play-circle pr-2" aria-hidden="true"></i>Watch
-                    </button>
-                    <button class="change-watch btn btn-primary" data-id="{{this.dataValues.id}}" data-newwatch="true">
-                        <i class="fa fa-check-square-o pr-2" aria-hidden="true"></i>Watched
-                    </button>       
-                </li>
-                {{/unless}}
-                {{/each}}
-            </ul>
-        </div>
-
+<div class="login container text-center col-12 col-md-8 col-lg-6 px-3">
+     <div class="title">StreamLine</div>
+    <div class="subtitle">Sit on your ass. Find your shows fast.</div>
+    <div class="subtitle">Log In</div>
+    <hr>
+    <form class="mx-auto form" method="POST" action="/api/login">
         
-
-        <div id="Watched" class="tabcontent">
-
-            <ul class="watchlist row" id="watched-list">
-                {{#each movies}}
-                {{#if this.dataValues.watched}}
-                <li data-id="{{this.dataValues.id}}" class="list-group-item col-sm-6 col-md-4">
-                    <button class="btn btn-secondary float-right delete"><i class="fa fa-remove" aria-hidden="true"></i></button>
-                    <h4>{{this.dataValues.movie}}<button class="change-loved btn" data-id="{{this.dataValues.id}}" data-newlove="true">
-                        <i class="fa fa-heart-o" id="loved" aria-hidden="true"></i></h4>
-                    </button>
-                    <img class="watch-picture img-fluid" src="{{this.dataValues.image}}">
-                    <button class="change-watch btn btn-primary" data-id="{{this.dataValues.id}}" data-newwatch="false">
-                        <i class="fa fa-film pr-2" aria-hidden="true"></i>Watch Again
-                    </button>    
-                </li>
-                {{/if}}
-                {{/each}}
-            </ul>
-
-        </div>
-        <div id="Favorites" class="tabcontent">
-            <ul class="loved row" id="loved-list">
-                {{#each movies}}
-                {{#if this.dataValues.loved}}
-                <li data-id="{{this.dataValues.id}}" class="list-group-item col-sm-6 col-md-4">
-                    <button class="btn btn-secondary float-right delete"><i class="fa fa-remove" aria-hidden="true"></i></button>
-                    <h4>{{this.dataValues.movie}}</h4>
-                    <img class="watch-picture img-fluid" src="{{this.dataValues.image}}">
-                    <button class="change-watch btn btn-primary" data-id="{{this.dataValues.id}}" data-newwatch="false">
-                        <i class="fa fa-film pr-2" aria-hidden="true"></i>Watch Again
-                    </button>
-                    <button class="change-loved btn" data-id="{{this.dataValues.id}}" data-newlove="true">
-                        <i class="fa fa-heart" id="loved" aria-hidden="true"></i>
-                    </button>
-                </li>
-                {{/if}}
-                {{/each}}
-            </ul>
-        </div>
-        <div id="Default" class="tabcontent show-content">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="image-animate"></div>
-                </div>
-                <div class="col-md-6 text-center my-auto">
-                    <div class="py-4 py-md-0">
-                        <h3 class="pb-3 pt-3 pt-sm-0">Browse Less.<br>
-                            Watch More.</h3>
-                        <p>Welcome to StreamLine, your one-stop resource for finding where your favorite movies and
-                            shows are available to watch online. Create an account and start adding to your watchlist
-                            today!</p>
-                    </div>
-                    <div class="tic-tac">
-                        <div class="row">
-                            <div class="col-6 steps step-1">
-                                <i class="fa step-icon fa-check-square-o" aria-hidden="true"></i>
-                                <h5>
-                                    Create Your Account
-                                </h5>
-                            </div>
-                            <div class="col-6 steps step-2">
-                                <i class="fa step-icon fa-search" aria-hidden="true"></i>
-                                <h5>
-                                    Find Movies & Shows
-                                </h5>
-                            </div>
-                            <div class="col-6 steps step-3">
-                                <i class="fa step-icon fa-play-circle" aria-hidden="true"></i>
-                                <h5>
-                                    Add to Watchlist
-                                </h5>
-                            </div>
-                            <div class="col-6 steps step-4">
-                                <i class="fa step-icon fa-heart-o" aria-hidden="true"></i>
-                                <h5>
-                                    Save to Favorites
-                                </h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Movie results -->
-        <div class="row movie-view" id="movie-view"></div>
-        <div class="hidden-posters-div">
-            <img src="/images/movie-poster2.jpg">
-            <img src="/images/movie-poster3.jpg">
-            <img src="/images/movie-poster4.jpg">
-            <img src="/images/movie-poster5.jpg">
-            <img src="/images/movie-poster1.jpg">
-        </div>
-
-        <!-- Movie Modal -->
-        <div class="modal fade" id="movieModal" tabindex="-1" role="dialog" aria-labelledby="movieModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title h2" id="loginModalLabel"></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="modal-icon-container row"></div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        {{!-- <button type="button" class="btn btn-primary">Add to Watchlist</button> --}}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--Modal div-->
-        <div id="modal-create"></div>
-    </div>
+        <input type="text" placeholder="Username" name="username" required>
+        <br>
+        <input id="myInput" type="password" placeholder="Enter Password" name="password" required>
+        <br>
+        <label><input type="checkbox" onclick="showPassword()"> Show Password</label>
+        <br>
+        <p>By creating an account you agree to our <a href="#" style="color:rgb(104, 140, 161)">Terms & Privacy</a>.</p>
+        <button type="submit" class="btn btn-primary">Log In</button>
+    </form>
+    <div>New User? <a href="/newuser" class="text-white">Click Here!</a></div>
 </div>
-<div class="container text-center" id="footer">
-    <p>Copyright 2020 <i class="fa fa-copyright"></i> <a href="https://github.com/JCCALL/verbose-octo-train" class="fa fa-github"> Verbose-Octo-Train </a></p>
-    <p id="foottext">Verbose-Octo-Train is: Lisa Campbell, Jordan Call, Shianne Taylor, Drew Congino, Joshua Duncan</p>
-    <br>
 </div>
+<script src="particles/particles.js"></script>
+<script src="particles/particles_app.js"></script>

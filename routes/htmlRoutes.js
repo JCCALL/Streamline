@@ -3,23 +3,24 @@ var db = require("../models");
 module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
-    db.Streamline.findAll({}).then(function(dbStreamline) {
-        var examples = {
-            movies: dbStreamline
-        }
-      res.render("index", examples);
+    // db.Streamline.findAll({}).then(function(dbStreamline) {
+    //     var examples = {
+    //         movies: dbStreamline
+    //     }
+      // res.render("index", examples);
+      res.render("index")
     });
-  });
+  // });
   // app.get("/", function(req, res) {
   //   res.render("index", {
   //     layout: 'main'
   //   });
   // });
-  app.get("/login", function(req, res) {
-    res.render("login", {
-      layout: 'main'
-    });
-  });
+  // app.get("/login", function(req, res) {
+  //   res.render("login", {
+  //     layout: 'main'
+  //   });
+  // });
   app.get("/newuser", function(req, res) {
     res.render("newuser", {
       layout: 'main'
@@ -50,8 +51,16 @@ module.exports = function(app) {
     });
   });
 
+  app.get("/stream", function(req, res) {
+    db.Streamline.findAll({}).then(function(dbStreamline) {
+          var examples = {
+              movies: dbStreamline
+          }
+      res.render("stream", examples);
+  });
+  });
   // Load example page and pass in an example by id
-  app.get("/:id", function(req, res) {
+  app.get("/stream/:id", function(req, res) {
       db.Users.findOne({
         where: {
           id: req.params.id
@@ -66,7 +75,7 @@ module.exports = function(app) {
           var examples = {
               movies: data,
           }
-          res.render("index", examples);
+          res.render("stream", examples);
 
         })
       
