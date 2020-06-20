@@ -9,7 +9,11 @@ module.exports = function (sequelize, DataTypes) {
         },
         username: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            isUnique: {
+                args: true,
+                msg: 'Username already in use.'
+            }
         },
         email: DataTypes.STRING,
         password: {
@@ -17,23 +21,25 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false
         },
     },
-        {
-            freezeTableName: true,
-            instanceMethods: {
-                generateHash(password) {
-                    return bcrypt.hash(password, bcrypt.genSaltSync(8));
-                },
-                validPassword(password) {
-                    return bcrypt.compare(password, this.password);
-                }
+    {
+        hooks: {
+            beforeCreate: (User) => {
+              const salt = bcrypt.genSaltSync();
+              User.password = bcrypt.hashSync(User.password, salt);
             }
-        });
-        
-        User.associate= (models) => {
-            User.hasMany(models.Streamline, {
-                onDelete: "cascade"
-            })
-        }
-        
+          },
+          instanceMethods: {
+            validPassword: function(password) {
+              return bcrypt.compareSync(password, this.password);
+            }
+          }    
+    });
+
+    User.associate = (models) => {
+        User.hasMany(models.Streamline, {
+            onDelete: "cascade"
+        })
+    }
+
     return User;
 };

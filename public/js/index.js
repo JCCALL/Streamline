@@ -179,8 +179,8 @@ $("#find-movie").on("click", function (event) {
                     var watchButton = '<button id="' + [i] + '" value="' + omdbIndex + '" class="btn btn-primary watch-button">Add to Watchlist</button>';
                     var detailsButton = '<button id="movieDetails' + [i] + '" value="' + imdbID + '" class="btn btn-primary details-button" data-toggle="modal" data-target="#movieModal' + [i] + '">Details</button>';
                     var locationList = $('<div class="location-list row">');
-                    var streamingIcons = $('<div class="streaming-list col-6">');
-                    var locationIcons = $('<div class="rent-or-buy-list col-6"><p id="stream">Rent | Buy</p><div>');
+                    var streamingIcons = $('<div class="streaming-list col-6"><div class="stream-heading" id="stream">Stream</div><div>');
+                    var locationIcons = $('<div class="rent-or-buy-list col-6"><div class="rent-heading" id="stream">Rent | Buy</div><div>');
                     for (var j = 0; j < utelly[i].locations.length; j++) {
                         var provider = utelly[i].locations[j].display_name;
                         // Divides streaming subscriptions from rent/buy
@@ -241,10 +241,11 @@ var handleFormSubmit = function (event) {
     var movieTitle = movieMatch.name;
     var imdbLink = movieMatch.external_ids.imdb.url;
     var searchID = movieMatch.external_ids.imdb.id;
+    // grab id in url
     var fullURL = window.location.pathname;
     var halfURL = fullURL.split('/', 2);
     var userID = halfURL[1];
-    
+
     var addedMovie = {
         movie: movieTitle,
         image: moviePic,
