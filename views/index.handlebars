@@ -21,27 +21,29 @@
 
         <div id="headLogin">
 
+            <!-- Demo button, not functional -->
+            <button class="btn btn-primary mr-2 login">
+                Profile</button>
+
             <!-- Button trigger login -->
-            <a href="/login"><button class="btn btn-primary mr-2 login">
-                    Login
+            <a href="/logout"><button class="btn btn-primary mr-2 login">
+                    Log Out
                 </button></a>
 
-            <!-- Button trigger register -->
-            <a href="/newuser"><button class="btn btn-primary mr-2 login">
-                    Register</button></a>
         </div>
 
         <!-- Tab section -->
         <div class="tab mt-5">
             <button class="tablinks" onclick="openTabs(event, 'Default')"><i class="fa fa-home"
                     aria-hidden="true"></i></button>
-
             <button class="tablinks" onclick="openTabs(event, 'Watchlist')"><i class="fa fa-film pr-2"
                     aria-hidden="true"></i>Watchlist</button>
             <button class="tablinks" onclick="openTabs(event, 'Watched')"><i class="fa fa-check-square-o pr-2"
                     aria-hidden="true"></i>Watched</button>
             <button class="tablinks" onclick="openTabs(event, 'Favorites')"><i class="fa fa-heart-o pr-2"
                     aria-hidden="true"></i>Loved</button>
+            <button class="tablinks float-right" onclick="openTabs(event, 'Hide')"><i class="fa fa-window-minimize"
+                    aria-hidden="true"></i></button>
 
         </div>
 
@@ -50,25 +52,25 @@
                 {{#each movies}}
                 {{#unless this.dataValues.watched}}
                 <li data-id="{{this.dataValues.id}}" class="list-group-item col-6 col-md-4">
-                    <button class="btn btn-secondary float-right delete"><i class="fa fa-remove" aria-hidden="true"></i></button>
-                    <h4>{{this.dataValues.movie}}<button class="change-loved btn" data-id="{{this.dataValues.id}}" data-newlove="true">
-                        <i class="fa fa-heart-o" id="loved" aria-hidden="true"></i>
-                    </button></h4>
-                    <img class="watch-picture img-fluid" src="{{this.dataValues.image}}"> 
-                    <button id="where-to-watch" type="button" class="btn btn-primary" data-toggle="modal" data-target="#movieModal" data-id="{{this.dataValues.imdbID}}"
-                        data-neweat="true">
+                    <button class="btn btn-secondary float-right delete"><i class="fa fa-remove"
+                            aria-hidden="true"></i></button>
+                    <h4>{{this.dataValues.movie}}<button class="change-loved btn" data-id="{{this.dataValues.id}}"
+                            data-newlove="true">
+                            <i class="fa fa-heart-o" id="loved" aria-hidden="true"></i>
+                        </button></h4>
+                    <img class="watch-picture img-fluid" src="{{this.dataValues.image}}">
+                    <button id="where-to-watch" type="button" class="btn btn-primary" data-toggle="modal"
+                        data-target="#movieModal" data-id="{{this.dataValues.imdbID}}" data-neweat="true">
                         <i class="fa fa-play-circle pr-2" aria-hidden="true"></i>Watch
                     </button>
                     <button class="change-watch btn btn-primary" data-id="{{this.dataValues.id}}" data-newwatch="true">
                         <i class="fa fa-check-square-o pr-2" aria-hidden="true"></i>Watched
-                    </button>       
+                    </button>
                 </li>
                 {{/unless}}
                 {{/each}}
             </ul>
         </div>
-
-
 
         <div id="Watched" class="tabcontent">
 
@@ -76,14 +78,16 @@
                 {{#each movies}}
                 {{#if this.dataValues.watched}}
                 <li data-id="{{this.dataValues.id}}" class="list-group-item col-sm-6 col-md-4">
-                    <button class="btn btn-secondary float-right delete"><i class="fa fa-remove" aria-hidden="true"></i></button>
-                    <h4>{{this.dataValues.movie}}<button class="change-loved btn" data-id="{{this.dataValues.id}}" data-newlove="true">
-                        <i class="fa fa-heart-o" id="loved" aria-hidden="true"></i></h4>
+                    <button class="btn btn-secondary float-right delete"><i class="fa fa-remove"
+                            aria-hidden="true"></i></button>
+                    <h4>{{this.dataValues.movie}}<button class="change-loved btn" data-id="{{this.dataValues.id}}"
+                            data-newlove="true">
+                            <i class="fa fa-heart-o" id="loved" aria-hidden="true"></i></h4>
                     </button>
                     <img class="watch-picture img-fluid" src="{{this.dataValues.image}}">
                     <button class="change-watch btn btn-primary" data-id="{{this.dataValues.id}}" data-newwatch="false">
                         <i class="fa fa-film pr-2" aria-hidden="true"></i>Watch Again
-                    </button>    
+                    </button>
                 </li>
                 {{/if}}
                 {{/each}}
@@ -91,20 +95,19 @@
 
         </div>
         <div id="Favorites" class="tabcontent">
-            <ul class="loved row" id="loved-list">
+            <ul class="watchlist row" id="loved-list">
                 {{#each movies}}
                 {{#if this.dataValues.loved}}
                 <li data-id="{{this.dataValues.id}}" class="list-group-item col-sm-6 col-md-4">
                     <button class="btn btn-secondary float-right delete"><i class="fa fa-remove"
                             aria-hidden="true"></i></button>
-                    <h4>{{this.dataValues.movie}}</h4>
+                    <h4>{{this.dataValues.movie}}<button class="change-loved btn" data-id="{{this.dataValues.id}}" data-newlove="false">
+                        <i class="fa fa-heart" id="loved" aria-hidden="true"></i>
+                    </button></h4>
                     <img class="watch-picture img-fluid" src="{{this.dataValues.image}}">
                     <button class="change-watch btn btn-primary" data-id="{{this.dataValues.id}}" data-newwatch="false">
                         <i class="fa fa-film pr-2" aria-hidden="true"></i>Watch Again
-                    </button>
-                    <button class="change-loved btn" data-id="{{this.dataValues.id}}" data-newlove="true">
-                        <i class="fa fa-heart" id="loved" aria-hidden="true"></i>
-                    </button>
+                    </button> 
                 </li>
                 {{/if}}
                 {{/each}}
@@ -126,21 +129,21 @@
                     <div class="tic-tac">
                         <div class="row">
                             <div class="col-6 steps step-1">
-                                <i class="fa step-icon fa-check-square-o" aria-hidden="true"></i>
-                                <h5>
-                                    Create Your Account
-                                </h5>
-                            </div>
-                            <div class="col-6 steps step-2">
                                 <i class="fa step-icon fa-search" aria-hidden="true"></i>
                                 <h5>
                                     Find Movies & Shows
                                 </h5>
                             </div>
+                            <div class="col-6 steps step-2">
+                                <i class="fa step-icon fa-film" aria-hidden="true"></i>
+                                <h5>
+                                    Add to Watchlist
+                                </h5>
+                            </div>
                             <div class="col-6 steps step-3">
                                 <i class="fa step-icon fa-play-circle" aria-hidden="true"></i>
                                 <h5>
-                                    Add to Watchlist
+                                    Enjoy Your Movie
                                 </h5>
                             </div>
                             <div class="col-6 steps step-4">
@@ -154,6 +157,7 @@
                 </div>
             </div>
         </div>
+        <div id="Hide" class="tabcontent d-none"></div>
 
         <!-- Movie results -->
         <div class="row movie-view" id="movie-view"></div>
@@ -190,13 +194,13 @@
         <div id="modal-create"></div>
 
         {{!-- Alert Modal --}}
-        <div class="modal fade" id="alertModal" role="dialog">
+        {{!-- <div class="modal fade" id="alertModal" role="dialog">
             <div class="modal-dialog">
 
                 <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Added to Watchlist!</h4>
+                <div class="text-content">
+                    <div class="text-header">
+                        <h4 class="text-title">Added to Watchlist!</h4>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -204,7 +208,7 @@
                 </div>
 
             </div>
-        </div>
+        </div> --}}
         <div class="modal fade" id="namesModal" role="dialog">
             <div class="modal-dialog">
 
@@ -230,9 +234,10 @@
             </div>
         </div>
     </div>
-    <div class="container text-center" id="footer">
-        Copyright 2020 <i class="fa fa-copyright"></i>
-        <a href="#namesModal" data-toggle="modal" data-target="#namesModal">Verbose-octo-train</a> |
-        <a href="https://github.com/JCCALL/verbose-octo-train" class="fa fa-github"> Github </a>
-    </div>
+
+</div>
+<div class="container text-center" id="footer">
+    <i class="fa fa-copyright"></i> Copyright 2020
+    <a href="#namesModal" data-toggle="modal" data-target="#namesModal">Verbose-octo-train</a> |
+    <a href="https://github.com/JCCALL/verbose-octo-train"><i class="fa fa-github"></i> Github </a>
 </div>

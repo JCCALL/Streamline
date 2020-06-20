@@ -5,10 +5,6 @@ var omdbIdArray = [];
 var utellyIdArray = [];
 var omdbPoster = [];
 
-var $watchList = $(".watchlist");
-var $watchedList = $("#watched-list");
-//var $lovedList = $("")
-
 // The API object contains methods for each kind of request we'll make
 var API = {
     saveExample: function (example) {
@@ -62,9 +58,9 @@ var API = {
             data: watched
         });
     },
-    loved: function (id, loved) {
+    lovedMovie: function (id, loved) {
         return $.ajax({
-            url: "api/examples/" + id,
+            url: "api/loved/" + id,
             type: "PUT",
             data: loved
         })
@@ -75,6 +71,7 @@ var API = {
 var refreshLists = function () {
     $("#watched-list").load(location.href + " #watched-list>*", "");
     $("#watch-list").load(location.href + " #watch-list>*", "");
+    $("#loved-list").load(location.href + " #loved-list>*", "");
 }
 
 // Deletes item from database
@@ -136,18 +133,18 @@ var detailsModal = function () {
     // clear out modal
     var imdbID = $(this).attr('value');
     console.log(imdbID);
-        // Runs a new omdb search by id to get plot & ratings data
-        var newURL = "https://www.omdbapi.com/?i=" + imdbID + "&plot=long&tomatoes&apikey=trilogy";
-        $.ajax({
-            url: newURL,
-            method: "GET"
-        }).then(function (response) {
-            console.log(response);
-            for (var i = 0; i < utellyIdArray.length; i++) {
-                $('#modal-title' + [i]).html(response.Title + '<div class="year">' + response.Year + '</div');
-                $('#modal-body' + [i]).html('<div class="col-12"><img class="img-fluid w-100" src="' + response.Poster + '"></div><div class="p-3">' + response.Plot + '</div>');
-            }
-        });     
+    // Runs a new omdb search by id to get plot & ratings data
+    var newURL = "https://www.omdbapi.com/?i=" + imdbID + "&plot=long&tomatoes&apikey=trilogy";
+    $.ajax({
+        url: newURL,
+        method: "GET"
+    }).then(function (response) {
+        console.log(response);
+        for (var i = 0; i < utellyIdArray.length; i++) {
+            $('#modal-title' + [i]).html(response.Title + '<div class="year">' + response.Year + '</div');
+            $('#modal-body' + [i]).html('<div class="col-12"><img class="img-fluid w-100" src="' + response.Poster + '"></div><div class="p-3">' + response.Plot + '</div>');
+        }
+    });
 };
 
 // Where to watch button click utelly search
@@ -164,9 +161,9 @@ var whereToWatch = function () {
         API.getMovieByID(imdbID).then(function (response) {
             var locations = response.collection.locations;
             $('.modal-title').text(response.collection.name);
-            $('.modal-body').html('<img class="img-fluid mb-3 rounded" src="' + response.collection.picture + '">');  
+            $('.modal-body').html('<img class="img-fluid mb-3 rounded" src="' + response.collection.picture + '">');
             var modalIcons = $('<div class="modal-icon-div row">');
-            for (var i = 0; i < locations.length; i++) {   
+            for (var i = 0; i < locations.length; i++) {
                 var location = locations[i].display_name;
                 // Divides streaming subscriptions from rent/buy
                 if (location === 'Netflix' || location === 'Amazon Prime Video' || location === 'Disney+' || location === 'HBO') {
@@ -188,25 +185,41 @@ var whereToWatch = function () {
                     $(modalIcons).append('<a target="_blank" class="modal-rent-buy" href=' +
                         locations[i].url + '><img class="modal-icons img-fluid" src=' +
                         locations[i].icon + '></a><br>');
-                }  
+                }
             }
             $('.modal-body').append(modalIcons);
         });
     });
 };
 
-//add to loved list
-// var changeLoved = function () {
-//     $("#loved").toggleClass("fa fa-heart");
-//     refreshLists();
-// };
+// add to loved list
+var markAsLoved = function () {
+    var movieID = $(this).attr("data-id");
+    console.log(movieID);
+    var newLove = $(this).data("newlove");
+    console.log(newLove);
+    if (newLove === "true") {
+        $("#loved").removeClass("fa-heart-o");
+        $("#loved").addClass("fa-heart");
+    } else {
+        $("#loved").removeClass("fa-heart");
+        $("#loved").addClass("fa-heart-o");
+    }
+    var newLoved = {
+        loved: newLove
+    };
+    API.lovedMovie(movieID, newLoved).then(function () {
+        refreshLists();
+    });
+};
+
 
 // Add event listeners to the update, delete, and details buttons
 $(document).on("click", ".delete", handleDeleteBtnClick);
 $(document).on("click", ".change-watch", changeWatch);
 $(document).on("click", "#where-to-watch", whereToWatch);
 $(document).on('click', '.watch-button', handleFormSubmit);
-// $(document).on("click", ".change-loved", changeLoved);
+$(document).on("click", ".change-loved", markAsLoved);
 $(document).on("click", ".details-button", detailsModal);
 
 // Find movie
@@ -271,7 +284,7 @@ $("#find-movie").on("click", function (event) {
                     var detailsButton = '<button id="movieDetails' + [i] + '" value="' + imdbID + '" class="btn btn-primary details-button" data-toggle="modal" data-target="#movieModal' + [i] + '">Details</button>';
                     var locationList = $('<div class="location-list row">');
                     var streamingIcons = $('<div class="streaming-list col-6"><div class="stream-heading" id="stream">Stream</div><div>');
-                    var locationIcons = $('<div class="rent-or-buy-list col-6"><div class="rent-heading" id="stream">Rent | Buy</div><div>');
+                    var locationIcons = $('<div class="rent-or-buy-list col-6"><div class="rent-heading" id="rent-buy">Rent | Buy</div><div>');
                     // Goes through streaming providers
                     for (var j = 0; j < utelly[i].locations.length; j++) {
                         var provider = utelly[i].locations[j].display_name;
@@ -294,6 +307,7 @@ $("#find-movie").on("click", function (event) {
                         }
                         $(locationList).append(streamingIcons, locationIcons);
                     }
+                        
 
                     // Add to search
                     $(buttonDiv).append(detailsButton, watchButton);
