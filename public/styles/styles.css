@@ -10,14 +10,11 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  position: relative;
 }
 
-.main-container {
-  margin-bottom: 40px;
-}
-#page_container {
-  position: relative;
-  min-height: 97vh;
+a:link, a:visited {
+    color: rgb(104, 140, 161);
 }
 
 /* The Tabs CSS */
@@ -273,8 +270,6 @@ body {
     text-align: right;
 }
 .watch-details-buttons {
-    /* width: 100%;
-    margin-top: 15px; */
     text-align: center;
     bottom: 8px;
     left: 0;
@@ -293,7 +288,7 @@ body {
 /* Footer */
 #footer {
   position: absolute;
-  top: 100%;
+  bottom: -60px;
   left: 0;
   right: 0;
 }
