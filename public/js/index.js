@@ -129,6 +129,7 @@ var handleFormSubmit = function (event) {
         refreshLists();
         console.log("added");
     });
+    
 };
 
 // Details button omdb call
