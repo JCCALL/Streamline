@@ -101,13 +101,14 @@
                 <li data-id="{{this.dataValues.id}}" class="list-group-item col-sm-6 col-md-4">
                     <button class="btn btn-secondary float-right delete"><i class="fa fa-remove"
                             aria-hidden="true"></i></button>
-                    <h4>{{this.dataValues.movie}}<button class="change-loved btn" data-id="{{this.dataValues.id}}" data-newlove="false">
-                        <i class="fa fa-heart" id="loved" aria-hidden="true"></i>
-                    </button></h4>
+                    <h4>{{this.dataValues.movie}}<button class="change-loved btn" data-id="{{this.dataValues.id}}"
+                            data-newlove="false">
+                            <i class="fa fa-heart" id="loved" aria-hidden="true"></i>
+                        </button></h4>
                     <img class="watch-picture img-fluid" src="{{this.dataValues.image}}">
                     <button class="change-watch btn btn-primary" data-id="{{this.dataValues.id}}" data-newwatch="false">
                         <i class="fa fa-film pr-2" aria-hidden="true"></i>Watch Again
-                    </button> 
+                    </button>
                 </li>
                 {{/if}}
                 {{/each}}
@@ -161,6 +162,7 @@
 
         <!-- Movie results -->
         <div class="row movie-view" id="movie-view"></div>
+
         <div class="hidden-posters-div">
             <img src="/images/movie-poster2.jpg">
             <img src="/images/movie-poster3.jpg">
@@ -193,22 +195,7 @@
         <!--Modal div-->
         <div id="modal-create"></div>
 
-        {{!-- Alert Modal --}}
-        {{!-- <div class="modal fade" id="alertModal" role="dialog">
-            <div class="modal-dialog">
-
-                <!-- Modal content-->
-                <div class="text-content">
-                    <div class="text-header">
-                        <h4 class="text-title">Added to Watchlist!</h4>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-
-            </div>
-        </div> --}}
+        <!--Names modal-->
         <div class="modal fade" id="namesModal" role="dialog">
             <div class="modal-dialog">
 

@@ -167,6 +167,19 @@ a:link, a:visited {
     padding-bottom: 3px;
     border-radius: 4px;
 }
+/* Alert modal */
+.alert-success {
+    width: 250px;
+    text-align: center;
+    color: white;
+    background-color: rgb(104, 140, 161);
+    position: absolute;
+    top: 175px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 1;
+}
 
 /* Modal CSS */
 .modal {
@@ -238,6 +251,8 @@ a:link, a:visited {
 .movie-view {
     justify-content: space-between;
     margin: auto;
+    z-index: 0;
+    position: relative;
 }
 
 .movie-list {
