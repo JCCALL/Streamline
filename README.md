@@ -58,4 +58,3 @@ This application was driven by a desire to spend less time trying to find out wh
 - [Drew Congino](https://github.com/dcongino)
 - [Josh Duncan](https://github.com/jduncan9720)
 - [Shianne Taylor](https://github.com/ShianneJT)
-- [Cas Wolff](https://github.com/ckwolff)
